@@ -54,7 +54,7 @@ sudo apt install -y build-essential cmake git python3-pip libgtk2.0-dev libasoun
 sudo apt install -y python3.12-venv
 python3 -m venv ~/.venvs/conan
 source ~/.venvs/conan/bin/activate
-pip install conan (talvez desnecessário)
+~pip install conan~ (talvez desnecessário)
 
 ## Se tiver uma GPU Intel, execute:
 sudo apt install -y intel-gpu-tools
