@@ -2,7 +2,9 @@
 # Instalação do Plugin Intel OpenVINO no Audacity 3.7 no Ubuntu 24.04
 
 ## Introdução
-Este tutorial descreve como instalar o plugin Intel OpenVINO no Audacity 3.7 em um ambiente Ubuntu 24.04.
+Este tutorial descreve como instalar o plugin Intel OpenVINO no Audacity 3.7 em um ambiente Ubuntu 24.04. 
+Para prosseguir tenha certeza de não ter uma versão do Audacity instalada, pois as distribuições ainda não estão usando a versão 3.7. E as que vem de repositórios snap ou flathub não foram compiadas para usar o OpenVINO. 
+O que esse tutorial pretende fazer é compilar o Audacity junto com o modulo OpenVINO a partir dos codigos fontes, então haverá muitas dependencias a serem instaladas que se você nunca compilou ou nunca compilará mais nada é um pouco de disperdicio ter toneladas de programas apenas para ter o Audacity+OpenVINO instalado em seu computador.
 
 ---
 ## Passo 1: Tenho uma GPU?
@@ -24,7 +26,12 @@ sudo apt install nvidia-driver-535 (ou driver correspondente)
 sudo apt install nvidia-opencl-icd-535 (ou driver correspondente)
 ```
 ## Passo 2: Tenho OpenCL instalado e funcional? 
-Execute o 'clinfo' no terminal, se ele responder:
+Execute no terminal:
+```bash
+sudo ldconfig
+clinfo
+```
+Se a saída do comando for algo como:
 ```bash
 Number of platforms                               0
 
