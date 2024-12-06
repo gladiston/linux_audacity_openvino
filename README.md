@@ -10,11 +10,12 @@ Este tutorial descreve como instalar o plugin Intel OpenVINO no Audacity 3.7 em 
 
 ```bash
 sudo apt update
-sudo apt install build-essential cmake git python3-pip libgtk2.0-dev libasound2-dev libjack-jackd2-dev uuid-dev ocl-icd-opencl-dev
-sudo apt install python3.12-venv
+sudo apt install -y clinfo
+sudo apt install -y build-essential cmake git python3-pip libgtk2.0-dev libasound2-dev libjack-jackd2-dev uuid-dev ocl-icd-opencl-dev
+sudo apt install -y python3.12-venv
 python3 -m venv ~/.venvs/conan
 source ~/.venvs/conan/bin/activate
-pip install conan
+pip install conan (talvez desnecessário)
 ```
 
 ---
