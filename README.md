@@ -47,7 +47,7 @@ ICD loader properties
   ICD loader Version                              2.3.2
   ICD loader Profile                              OpenCL 3.0
 ```
-'Number of platforms = 0' é ruim porque significa que você não tem uma GPU habilitada em seu sistema para rodar opencl e será inutil prosseguir. Você deve resolver este problema antes.
+'**Number of platforms = 0**' é ruim porque significa que você não tem uma GPU habilitada em seu sistema para rodar opencl e será inutil prosseguir. Você deve resolver este problema antes.
 
 ## Passo 3: Instale as dependências necessárias
 
