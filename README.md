@@ -176,13 +176,28 @@ sudo apt install mesa-opencl-icd
     nano ../modules/CMakeLists.txt
     ```
 
-    Adicione o seguinte após o comentário:
+    Adicione o seguinte linha:
     ```bash
-    # Include the modules that we'll build
     add_subdirectory(mod-openvino)
     ```
+    Ficando assim no final:
+   ...
+   ```bash
+    foreach( MODULE ${MODULES} )
+       add_subdirectory("${MODULE}")
+    endforeach()
 
-6. Recompile o Audacity:
+     add_subdirectory(mod-openvino)
+
+    if( NOT CMAKE_SYSTEM_NAME MATCHES "Darwin" )
+       if( NOT "${CMAKE_GENERATOR}" MATCHES "Visual Studio*")
+          install( DIRECTORY "${_DEST}/modules"
+                   DESTINATION "${_PKGLIB}" )
+       endif()
+    endif()
+...
+
+7. Recompile o Audacity:
     ```bash
     cd ../build
     cmake -G "Unix Makefiles" .. -DCMAKE_BUILD_TYPE=Release
