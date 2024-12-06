@@ -59,14 +59,6 @@ sudo apt install -y python3.12-venv
 python3 -m venv ~/.venvs/conan
 source ~/.venvs/conan/bin/activate
 ~pip install conan~ (talvez desnecessário)
-
-## Se tiver uma GPU Intel, execute:
-sudo apt install -y intel-gpu-tools
-## Se tiver uma GPU nVIDIA:
-sudo apt install nvidia-driver-535 (ou driver correspondente)
-sudo apt install nvidia-opencl-icd-535 (ou driver correspondente)
-## Se tiver uma GPU AMD:
-sudo apt install mesa-opencl-icd
 ```
 
 ## Passo 4: Baixe e instale o OpenVINO
@@ -129,65 +121,61 @@ sudo apt install mesa-opencl-icd
     ```bash
     mkdir build
     cd build
-    cmake .. -DWHISPER_OPENVINO=ON
+    cmake .. -DWHISPER_OPENVINO=ON -DCMAKE_INSTALL_PREFIX=/usr/local
     make -j$(nproc)
+    sudo make install
     ```
-
+~inicio de revisao~
 3. Instale o `whisper.cpp`:
     ```bash
     cmake --install . --config Release --prefix ./installed
     ```
-
+~fim de revisao~
 4. Configure as variáveis de ambiente:
     ```bash
-    export WHISPERCPP_ROOTDIR=$(pwd)/installed
+    export WHISPERCPP_ROOTDIR=/usr/local/lib
     export LD_LIBRARY_PATH=${WHISPERCPP_ROOTDIR}/lib:$LD_LIBRARY_PATH
+    sudo ldconfig
     ```
 
 ## Passo 7: Compile o Audacity com o módulo OpenVINO
 
 1. Clone o repositório do Audacity:
     ```bash
+    cd ~/Downloads/openvino/l_openvino_toolkit_ubuntu24_2024.5.0.17288.7975fa5da0c_x86_64
     git clone https://github.com/audacity/audacity.git
     cd audacity
     git checkout release-3.7.0
     ```
 
-2. Crie a pasta de build e compile:
-    ```bash
-    mkdir build
-    cd build
-    cmake -G "Unix Makefiles" .. -DCMAKE_BUILD_TYPE=Release
-    make -j$(nproc)
-    ```
-
-3. Clone o repositório do módulo OpenVINO para o Audacity:
+2. Clone o repositório do módulo OpenVINO para o Audacity:
     ```bash
     git clone https://github.com/intel/openvino-plugins-ai-audacity.git
     ```
 
-4. Copie o módulo para o diretório de módulos do Audacity:
+3. Copie o módulo para o diretório de módulos do Audacity:
     ```bash
+    cp -r openvino-plugins-ai-audacity/mod-openvino ./modules/
     cp -r openvino-plugins-ai-audacity/mod-openvino ../modules/
     ```
-
-5. Edite o arquivo `CMakeLists.txt` no diretório `modules` do Audacity:
+4. Edite o arquivo `CMakeLists.txt` no diretório `modules` do Audacity:
     ```bash
-    nano ../modules/CMakeLists.txt
+    nano ./modules/CMakeLists.txt
     ```
 
     Adicione o seguinte linha:
     ```bash
     add_subdirectory(mod-openvino)
     ```
-    Ficando assim no final:
-   ...
+    
+   Ficando assim no final:
+   
    ```bash
     foreach( MODULE ${MODULES} )
        add_subdirectory("${MODULE}")
     endforeach()
 
-     add_subdirectory(mod-openvino)
+    *add_subdirectory(mod-openvino)*
 
     if( NOT CMAKE_SYSTEM_NAME MATCHES "Darwin" )
        if( NOT "${CMAKE_GENERATOR}" MATCHES "Visual Studio*")
@@ -195,7 +183,16 @@ sudo apt install mesa-opencl-icd
                    DESTINATION "${_PKGLIB}" )
        endif()
     endif()
-...
+...    
+5. Crie a pasta de build e compile:
+    ```bash
+    mkdir build
+    cd build
+    cmake -G "Unix Makefiles" .. -DCMAKE_BUILD_TYPE=Release
+    make -j$(nproc)
+    ```
+
+
 
 7. Recompile o Audacity:
     ```bash
