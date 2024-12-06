@@ -204,3 +204,4 @@ source ~/.venvs/conan/bin/activate
 ---
 
 Seguindo esses passos, o plugin Intel OpenVINO estará instalado e funcionando no Audacity 3.7 no Ubuntu 24.04.
+Este script foi adaptado originalmente das instruçoes em: https://github.com/intel/openvino-plugins-ai-audacity/blob/main/doc/build_doc/linux/README.md
