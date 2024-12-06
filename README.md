@@ -6,8 +6,9 @@ Este tutorial descreve como instalar o plugin Intel OpenVINO no Audacity 3.7 em 
 
 ---
 ## Passo 1: Tenho uma GPU?
-Sem GPU, não vai dar certo. Por sorte, todas as plataformas atuais, incluindo as Intel Onboard são GPUs também. Então confira qual a sua GPU e instale os drivers adequados. 
-Se tiver uma GPU Intel, execute:
+Sem GPU, não vai dar certo. Por sorte, todas as plataformas atuais, incluindo as Intel Onboard são GPUs também. Então confira qual a sua GPU e instale os drivers adequados.  
+
+# Se tiver uma GPU Intel, execute:
 ```bash
 sudo apt install -y intel-gpu-tools
 ```
