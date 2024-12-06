@@ -105,6 +105,7 @@ sudo apt install mesa-opencl-icd
 2. Extraia o arquivo:
     ```bash
     unzip libtorch-cxx11-abi-shared-with-deps-2.4.1+cpu.zip
+    rm -f libtorch-cxx11-abi-shared-with-deps-2.4.1+cpu.zip
     ```
 
 3. Configure a variável de ambiente:
