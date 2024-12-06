@@ -170,7 +170,8 @@ sudo apt install mesa-opencl-icd
     ```
 
     Adicione o seguinte após o comentário:
-    ```cmake
+    ```bash
+    # Include the modules that we'll build
     add_subdirectory(mod-openvino)
     ```
 
