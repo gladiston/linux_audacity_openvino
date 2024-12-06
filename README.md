@@ -34,7 +34,7 @@ ICD loader properties
   ICD loader Version                              2.3.2
   ICD loader Profile                              OpenCL 3.0
 ```
-É porque você não tem uma GPU habilitada em seu sistema e será inutil prosseguir. Você deve resolver este problema antes.
+É porque você não tem uma GPU habilitada em seu sistema para rodar opencl e será inutil prosseguir. Você deve resolver este problema antes.
 
 ## Passo 3: Instale as dependências necessárias
 
