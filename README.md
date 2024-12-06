@@ -126,24 +126,41 @@ Precisartemos copiá-los para: (cuidado, linha muito extensa)
     ```bash
     export LIBTORCH_ROOTDIR=$(pwd)/libtorch
     ```
+
 ## Passo 6: Compile o `whisper.cpp` com suporte ao OpenVINO
 
+1. Verifique quantos processadores serão suportados:
+   ```bash
+   echo $(nproc)
+   ```
+   A resposta será 2, 4, 8, 16...64 que será a quantidade de nucleuos/threads que seu computador suportará, quanto mais, melhor. Se a resposta for vazia, APENAS SE FOR VAZIA, você terá que especificar na mão, eu usarei 4, mas se seu computador suportar mais, especifique quantos deseja usar:
+```bash
+   set nproc=4
+   ```   
 1. Clone o repositório:
     ```bash
+    cd ~/Downloads/openvino/l_openvino_toolkit_ubuntu24_2024.5.0.17288.7975fa5da0c_x86_64
+    source ~/Downloads/openvino/l_openvino_toolkit_ubuntu24_2024.5.0.17288.7975fa5da0c_x86_64/setupvars.sh
     git clone https://github.com/ggerganov/whisper.cpp
     cd whisper.cpp
     git checkout v1.5.4
+    cd..
     ```
 
 2. Crie a pasta de build e compile:
     ```bash
     mkdir build
     cd build
-    cmake .. -DWHISPER_OPENVINO=ON -DCMAKE_INSTALL_PREFIX=/usr/local
+    cmake ../whisper.cpp/ -DWHISPER_OPENVINO=ON
     make -j$(nproc)
     sudo make install
     ```
-    
+    Os arquivos do 'whisper' que nos importam foram instalados em:
+    ```
+    /usr/local/lib/libwhisper.so
+    /usr/local/include/ggml.h
+    /usr/local/include/whisper.h
+    ``` 
 4. Configure as variáveis de ambiente:
     ```bash
     export WHISPERCPP_ROOTDIR=/usr/local/lib
@@ -159,19 +176,29 @@ Precisartemos copiá-los para: (cuidado, linha muito extensa)
     git clone https://github.com/audacity/audacity.git
     cd audacity
     git checkout release-3.7.0
+    cd ..
+    mkdir audacity-build
+    cd audacity-build
+    cmake -G "Unix Makefiles" ../audacity -DCMAKE_BUILD_TYPE=Release
+    
+    make -j$(nproc)
+    sudo make install
     ```
-
-2. Clone o repositório do módulo plugin OpenVINO dentro da pasta do Audacity:
+    O comando 'sudo make install' irá colocar os binários do Audacity no radar de seu sistema operacional, por essa razão, você não deve instalar o audacity dos repositórios, pois o mesmo seria sobreposto.
+   
+## Passo 8: Compile o módulo-plugin OpenVINO
+2. Clone o repositório do módulo-plugin OpenVINO dentro da pasta do Audacity:
     ```bash
+    cd ~/Downloads/openvino/l_openvino_toolkit_ubuntu24_2024.5.0.17288.7975fa5da0c_x86_64
     git clone https://github.com/intel/openvino-plugins-ai-audacity.git
     ```   
 3. Copie o módulo para o diretório de módulos do Audacity:
     ```bash
-    cp -r openvino-plugins-ai-audacity/mod-openvino ./modules/    
+    cp -r openvino-plugins-ai-audacity/mod-openvino audacity/modules/    
     ```
 4. Edite o arquivo `CMakeLists.txt` no diretório `modules` do Audacity:
     ```bash
-    nano ./modules/CMakeLists.txt
+    nano audacity/modules/CMakeLists.txt
     ```
 
     Adicione o seguinte linha:
@@ -186,7 +213,7 @@ Precisartemos copiá-los para: (cuidado, linha muito extensa)
        add_subdirectory("${MODULE}")
     endforeach()
 
-    *add_subdirectory(mod-openvino)*
+    **add_subdirectory(mod-openvino)**
 
     if( NOT CMAKE_SYSTEM_NAME MATCHES "Darwin" )
        if( NOT "${CMAKE_GENERATOR}" MATCHES "Visual Studio*")
@@ -198,10 +225,13 @@ Precisartemos copiá-los para: (cuidado, linha muito extensa)
  
 5. Crie a pasta de build e compile o Audacity:
     ```bash
-    cd ~/Downloads/openvino/l_openvino_toolkit_ubuntu24_2024.5.0.17288.7975fa5da0c_x86_64/audacity
-    mkdir build
-    cd build
-    cmake -G "Unix Makefiles" .. -DCMAKE_BUILD_TYPE=Release
+    source ~/Downloads/openvino/l_openvino_toolkit_ubuntu24_2024.5.0.17288.7975fa5da0c_x86_64/setupvars.sh
+    export WHISPERCPP_ROOTDIR=/usr/local/lib
+    export LD_LIBRARY_PATH=${WHISPERCPP_ROOTDIR}/lib:$LD_LIBRARY_PATH
+    sudo ldconfig
+    
+    cd ~/Downloads/openvino/l_openvino_toolkit_ubuntu24_2024.5.0.17288.7975fa5da0c_x86_64/audacity-build
+    cmake -G "Unix Makefiles" ../audacity -DCMAKE_BUILD_TYPE=Release
     make -j$(nproc)
     sudo make install
     ```
