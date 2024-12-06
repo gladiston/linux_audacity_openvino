@@ -23,7 +23,6 @@ sudo apt install mesa-opencl-icd
 sudo apt install nvidia-driver-535 (ou driver correspondente)
 sudo apt install nvidia-opencl-icd-535 (ou driver correspondente)
 ```
----
 ## Passo 2: Tenho OpenCL instalado e funcional? 
 Execute o 'clinfo' no terminal, se ele responder:
 ```bash
@@ -36,7 +35,7 @@ ICD loader properties
   ICD loader Profile                              OpenCL 3.0
 ```
 É porque você não tem uma GPU habilitada em seu sistema e será inutil prosseguir. Você deve resolver este problema antes.
----
+
 ## Passo 3: Instale as dependências necessárias
 
 ```bash
@@ -56,9 +55,6 @@ sudo apt install nvidia-opencl-icd-535 (ou driver correspondente)
 ## Se tiver uma GPU AMD:
 sudo apt install mesa-opencl-icd
 ```
-
----
-
 
 ## Passo 4: Baixe e instale o OpenVINO
 
@@ -90,9 +86,6 @@ sudo apt install mesa-opencl-icd
     ```bash
     echo "source ~/Downloads/openvino/l_openvino_toolkit_ubuntu24_2024.5.0.17288.7975fa5da0c_x86_64/setupvars.sh" >> ~/.bashrc
     ```
-
----
-
 ## Passo 5: Baixe e instale o Libtorch
 
 1. Baixe a versão C++ do Libtorch:
@@ -109,10 +102,7 @@ sudo apt install mesa-opencl-icd
     ```bash
     export LIBTORCH_ROOTDIR=$(pwd)/libtorch
     ```
-
----
-
-## Passo 5: Compile o `whisper.cpp` com suporte ao OpenVINO
+## Passo 6: Compile o `whisper.cpp` com suporte ao OpenVINO
 
 1. Clone o repositório:
     ```bash
@@ -139,8 +129,6 @@ sudo apt install mesa-opencl-icd
     export WHISPERCPP_ROOTDIR=$(pwd)/installed
     export LD_LIBRARY_PATH=${WHISPERCPP_ROOTDIR}/lib:$LD_LIBRARY_PATH
     ```
-
----
 
 ## Passo 7: Compile o Audacity com o módulo OpenVINO
 
@@ -186,8 +174,6 @@ sudo apt install mesa-opencl-icd
     make -j$(nproc)
     sudo make install
     ```
-
----
 
 ## Passo 8: Ative o módulo OpenVINO no Audacity
 
