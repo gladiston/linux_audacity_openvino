@@ -12,10 +12,12 @@ Sem GPU, não vai dar certo. Por sorte, todas as plataformas atuais, incluindo a
 ```bash
 sudo apt install -y intel-gpu-tools
 ```
+
 # Se tiver uma GPU AMD:
 ```bash
 sudo apt install mesa-opencl-icd
 ```
+
 # Se tiver uma GPU nVIDIA, tome cautela, vou assumir o driver 535, porém pode ser outro:
 ```bash
 sudo apt install nvidia-driver-535 (ou driver correspondente)
