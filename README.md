@@ -5,8 +5,35 @@
 Este tutorial descreve como instalar o plugin Intel OpenVINO no Audacity 3.7 em um ambiente Ubuntu 24.04.
 
 ---
+## Passo 1: Tenho uma GPU?
+Sem GPU, não vai dar certo. Por sorte, todas as plataformas atuais, incluindo as Intel Onboard são GPUs também. Então confira qual a sua GPU e instale os drivers adequados. 
+Se tiver uma GPU Intel, execute:
+```bash
+sudo apt install -y intel-gpu-tools
+```
+## Se tiver uma GPU AMD:
+```bash
+sudo apt install mesa-opencl-icd
+```
+## Se tiver uma GPU nVIDIA, tome cautela, vou assumir o driver 535, porém pode ser outro:
+```bash
+sudo apt install nvidia-driver-535 (ou driver correspondente)
+sudo apt install nvidia-opencl-icd-535 (ou driver correspondente)
+```
+---
+# Passo 2:Execute o 'clinfo', se ele responder
+```bash
+Number of platforms                               0
 
-## Passo 1: Instale as dependências necessárias
+ICD loader properties
+  ICD loader Name                                 OpenCL ICD Loader
+  ICD loader Vendor                               OCL Icd free software
+  ICD loader Version                              2.3.2
+  ICD loader Profile                              OpenCL 3.0
+```
+É porque você não tem uma GPU habilitada em seu sistema e será inutil prosseguir. Você deve resolver este problema antes.
+
+## Passo 3: Instale as dependências necessárias
 
 ```bash
 sudo apt update
@@ -16,11 +43,20 @@ sudo apt install -y python3.12-venv
 python3 -m venv ~/.venvs/conan
 source ~/.venvs/conan/bin/activate
 pip install conan (talvez desnecessário)
+
+## Se tiver uma GPU Intel, execute:
+sudo apt install -y intel-gpu-tools
+## Se tiver uma GPU nVIDIA:
+sudo apt install nvidia-driver-535 (ou driver correspondente)
+sudo apt install nvidia-opencl-icd-535 (ou driver correspondente)
+## Se tiver uma GPU AMD:
+sudo apt install mesa-opencl-icd
 ```
 
 ---
 
-## Passo 2: Baixe e instale o OpenVINO
+
+## Passo 3: Baixe e instale o OpenVINO
 
 1. Acesse a [página de downloads do OpenVINO](https://github.com/openvinotoolkit/openvino/releases) e localize o pacote para Ubuntu 24.04:
     ```bash
