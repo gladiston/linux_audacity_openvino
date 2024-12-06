@@ -125,12 +125,7 @@ source ~/.venvs/conan/bin/activate
     make -j$(nproc)
     sudo make install
     ```
-~inicio de revisao~
-3. Instale o `whisper.cpp`:
-    ```bash
-    cmake --install . --config Release --prefix ./installed
-    ```
-~fim de revisao~
+    
 4. Configure as variáveis de ambiente:
     ```bash
     export WHISPERCPP_ROOTDIR=/usr/local/lib
@@ -148,15 +143,13 @@ source ~/.venvs/conan/bin/activate
     git checkout release-3.7.0
     ```
 
-2. Clone o repositório do módulo OpenVINO para o Audacity:
+2. Clone o repositório do módulo plugin OpenVINO dentro da pasta do Audacity:
     ```bash
     git clone https://github.com/intel/openvino-plugins-ai-audacity.git
-    ```
-
+    ```   
 3. Copie o módulo para o diretório de módulos do Audacity:
     ```bash
-    cp -r openvino-plugins-ai-audacity/mod-openvino ./modules/
-    cp -r openvino-plugins-ai-audacity/mod-openvino ../modules/
+    cp -r openvino-plugins-ai-audacity/mod-openvino ./modules/    
     ```
 4. Edite o arquivo `CMakeLists.txt` no diretório `modules` do Audacity:
     ```bash
@@ -183,26 +176,19 @@ source ~/.venvs/conan/bin/activate
                    DESTINATION "${_PKGLIB}" )
        endif()
     endif()
-...    
-5. Crie a pasta de build e compile:
+   ```
+ 
+5. Crie a pasta de build e compile o Audacity:
     ```bash
+    cd ~/Downloads/openvino/l_openvino_toolkit_ubuntu24_2024.5.0.17288.7975fa5da0c_x86_64/audacity
     mkdir build
     cd build
-    cmake -G "Unix Makefiles" .. -DCMAKE_BUILD_TYPE=Release
-    make -j$(nproc)
-    ```
-
-
-
-7. Recompile o Audacity:
-    ```bash
-    cd ../build
     cmake -G "Unix Makefiles" .. -DCMAKE_BUILD_TYPE=Release
     make -j$(nproc)
     sudo make install
     ```
 
-## Passo 8: Ative o módulo OpenVINO no Audacity
+## Último passo: Ative o módulo OpenVINO no Audacity
 
 1. Inicie o Audacity:
     ```bash
