@@ -16,17 +16,17 @@ sudo lshw -C display
 ``` 
 Ententa que saber qual placa é, e saber que driver está usando, são coisas distintas.
 
-# Se tiver uma GPU Intel, execute:
+**Se tiver uma GPU Intel, execute:**
 ```bash
 sudo apt install -y intel-gpu-tools
 ```
 
-# Se tiver uma GPU AMD:
+**Se tiver uma GPU AMD:**
 ```bash
 sudo apt install mesa-opencl-icd
 ```
 
-# Se tiver uma GPU nVIDIA, tome cautela, vou assumir o driver 535, porém pode ser outro:
+**Se tiver uma GPU nVIDIA, tome cautela, vou assumir o driver 535, porém pode ser outro:**
 ```bash
 sudo apt install nvidia-driver-535 (ou driver correspondente)
 sudo apt install nvidia-opencl-icd-535 (ou driver correspondente)
