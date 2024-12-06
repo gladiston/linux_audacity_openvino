@@ -10,7 +10,11 @@ O que esse tutorial pretende fazer é compilar o Audacity junto com o modulo Ope
 
 ---
 ## Passo 1: Tenho uma GPU?
-Sem GPU, não vai dar certo. Por sorte, todas as plataformas atuais, incluindo as Intel Onboard são GPUs também. Então confira qual a sua GPU e instale os drivers adequados.  
+Sem GPU, não vai dar certo. Por sorte, todas as plataformas atuais, incluindo as Intel Onboard são GPUs também. Então confira qual a sua GPU e instale os drivers adequados. Você pode descobrir que placa de vídeo possui simplesmente executando no terminal:
+```bash
+sudo lshw -C display
+``` 
+Ententa que saber qual placa é, e saber que driver está usando, são coisas distintas.
 
 # Se tiver uma GPU Intel, execute:
 ```bash
