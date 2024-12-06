@@ -11,17 +11,18 @@ Se tiver uma GPU Intel, execute:
 ```bash
 sudo apt install -y intel-gpu-tools
 ```
-## Se tiver uma GPU AMD:
+# Se tiver uma GPU AMD:
 ```bash
 sudo apt install mesa-opencl-icd
 ```
-## Se tiver uma GPU nVIDIA, tome cautela, vou assumir o driver 535, porém pode ser outro:
+# Se tiver uma GPU nVIDIA, tome cautela, vou assumir o driver 535, porém pode ser outro:
 ```bash
 sudo apt install nvidia-driver-535 (ou driver correspondente)
 sudo apt install nvidia-opencl-icd-535 (ou driver correspondente)
 ```
 ---
-# Passo 2:Execute o 'clinfo', se ele responder
+## Passo 2: Tenho OpenCL instalado e funcional? 
+Execute o 'clinfo' no terminal, se ele responder:
 ```bash
 Number of platforms                               0
 
@@ -32,7 +33,7 @@ ICD loader properties
   ICD loader Profile                              OpenCL 3.0
 ```
 É porque você não tem uma GPU habilitada em seu sistema e será inutil prosseguir. Você deve resolver este problema antes.
-
+---
 ## Passo 3: Instale as dependências necessárias
 
 ```bash
@@ -56,7 +57,7 @@ sudo apt install mesa-opencl-icd
 ---
 
 
-## Passo 3: Baixe e instale o OpenVINO
+## Passo 4: Baixe e instale o OpenVINO
 
 1. Acesse a [página de downloads do OpenVINO](https://github.com/openvinotoolkit/openvino/releases) e localize o pacote para Ubuntu 24.04:
     ```bash
@@ -89,7 +90,7 @@ sudo apt install mesa-opencl-icd
 
 ---
 
-## Passo 3: Baixe e instale o Libtorch
+## Passo 5: Baixe e instale o Libtorch
 
 1. Baixe a versão C++ do Libtorch:
     ```bash
@@ -108,7 +109,7 @@ sudo apt install mesa-opencl-icd
 
 ---
 
-## Passo 4: Compile o `whisper.cpp` com suporte ao OpenVINO
+## Passo 5: Compile o `whisper.cpp` com suporte ao OpenVINO
 
 1. Clone o repositório:
     ```bash
@@ -138,7 +139,7 @@ sudo apt install mesa-opencl-icd
 
 ---
 
-## Passo 5: Compile o Audacity com o módulo OpenVINO
+## Passo 7: Compile o Audacity com o módulo OpenVINO
 
 1. Clone o repositório do Audacity:
     ```bash
@@ -185,7 +186,7 @@ sudo apt install mesa-opencl-icd
 
 ---
 
-## Passo 6: Ative o módulo OpenVINO no Audacity
+## Passo 8: Ative o módulo OpenVINO no Audacity
 
 1. Inicie o Audacity:
     ```bash
