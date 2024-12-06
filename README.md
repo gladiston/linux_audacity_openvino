@@ -91,6 +91,24 @@ source ~/.venvs/conan/bin/activate
     ```bash
     echo "source ~/Downloads/openvino/l_openvino_toolkit_ubuntu24_2024.5.0.17288.7975fa5da0c_x86_64/setupvars.sh" >> ~/.bashrc
     ```
+## Passo 5: OpenVINO Tokenizers Extension 
+Vá até a página https://storage.openvinotoolkit.org/repositories/openvino_tokenizers/packages/2024.5.0.0/[https://storage.openvinotoolkit.org/repositories/openvino_tokenizers/packages/2024.5.0.0/] e baixe a versão correspondente ao seu Ubuntu, exemplo:
+  ```bash
+  wget -vc https://storage.openvinotoolkit.org/repositories/openvino_tokenizers/packages/2024.5.0.0/openvino_tokenizers_ubuntu24_2024.5.0.0_x86_64.tar.gz
+  tar zxvf openvino_tokenizers_ubuntu24_2024.5.0.0_x86_64.tar.gz
+  rm -f openvino_tokenizers_ubuntu24_2024.5.0.0_x86_64.tar.gz
+  ```
+Serão extraidos os seguintes arquivos na pasta runtime/lib/intel64/ e que nos interessam:
+  ```
+  (...)
+  runtime/lib/intel64/libcore_tokenizers.so
+  runtime/lib/intel64/libopenvino_tokenizers.so
+  ```
+Precisartemos copiá-los para: (cuidado, linha muito extensa)
+  ```bash
+  cp -r ~/Downloads/openvino/l_openvino_toolkit_ubuntu24_2024.5.0.17288.7975fa5da0c_x86_64/install_dependencies/runtime/lib/intel64/* ~/Downloads/openvino/l_openvino_toolkit_ubuntu24_2024.5.0.17288.7975fa5da0c_x86_64/runtime/lib/intel64
+  ```
+
 ## Passo 5: Baixe e instale o Libtorch
 
 1. Baixe a versão C++ do Libtorch:
