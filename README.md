@@ -149,7 +149,7 @@ Precisartemos copiá-los para: (cuidado, linha muito extensa)
 
 3. Configure a variável de ambiente:
     ```bash
-    export LIBTORCH_ROOTDIR=$(pwd)/libtorch
+    export LIBTORCH_ROOTDIR=~/Downloads/openvino/l_openvino_toolkit_ubuntu24_2024.5.0.17288.7975fa5da0c_x86_64/install_dependencies/libtorch
     ```
 
 ## Passo 6: Compile o `whisper.cpp` com suporte ao OpenVINO
