@@ -70,7 +70,15 @@ sudo apt install -y python3.12-venv
 python3 -m venv ~/.venvs/conan
 source ~/.venvs/conan/bin/activate
 ```
-~~pip install conan~~ (talvez desnecessário)
+Execute também:
+```bash
+source ~/.venvs/conan/bin/activate
+```
+isso fará abrir uma especie shell do python, daí você executa:
+```bash
+(conan) ~➤ pip install conan
+```
+E o programa irá instalar o 'conan' no ambiente do python.
 
 ## Passo 4: Baixe e instale o OpenVINO
 
