@@ -78,35 +78,38 @@ isso fará abrir uma especie shell do python, daí você executa:
 ```bash
 (conan) ~➤ pip install conan
 ```
-E o programa irá instalar o 'conan' no ambiente do python.
+O comando 'pip install conan' irá instalar o 'conan' neste ambiente do python.
 
 ## Passo 4: Baixe e instale o OpenVINO
 
-1. Acesse a [página de downloads do OpenVINO](https://github.com/openvinotoolkit/openvino/releases) e localize o pacote para Ubuntu 24.04:
+1. Crie uma pasta de download para o que iremos baixar:
     ```bash
     mkdir ~/Downloads/openvino
     cd ~/Downloads/openvino
+    ```
+    
+2. Acesse a [página de downloads do OpenVINO](https://github.com/openvinotoolkit/openvino/releases) e localize o pacote para Ubuntu 24.04 e faça o download para a pasta '~/Downloads/openvino'. Se tiver usando o Ubuntu 24.04, poderá baixá-lo pelo terminal:
+    ```bash
     wget -vc https://storage.openvinotoolkit.org/repositories/openvino/packages/2024.5/linux/l_openvino_toolkit_ubuntu24_2024.5.0.17288.7975fa5da0c_x86_64.tgz
     ```
-
-2. Extraia o arquivo:
+3. Extraia o arquivo:
     ```bash
     tar xvf l_openvino_toolkit_ubuntu24_2024.5.0.17288.7975fa5da0c_x86_64.tgz
     rm -f l_openvino_toolkit_ubuntu24_2024.5.0.17288.7975fa5da0c_x86_64.tgz
     ```
 
-3. Instale as dependências do OpenVINO:
+4. Instale as dependências do OpenVINO:
     ```bash
     cd l_openvino_toolkit_ubuntu24_2024.5.0.17288.7975fa5da0c_x86_64/install_dependencies/
     sudo -E ./install_openvino_dependencies.sh
     ```
 
-4. Configure o ambiente:
+5. Configure o ambiente:
     ```bash
     source ~/Downloads/openvino/l_openvino_toolkit_ubuntu24_2024.5.0.17288.7975fa5da0c_x86_64/setupvars.sh
     ```
 
-5. Para carregar automaticamente as variáveis em novas sessões:
+6. Para carregar automaticamente as variáveis em novas sessões:
     ```bash
     echo "source ~/Downloads/openvino/l_openvino_toolkit_ubuntu24_2024.5.0.17288.7975fa5da0c_x86_64/setupvars.sh" >> ~/.bashrc
     ```
