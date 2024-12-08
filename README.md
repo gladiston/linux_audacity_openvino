@@ -221,12 +221,15 @@ Precisartemos copiá-los para: (cuidado, linha muito extensa)
     ```bash   
     sudo make install
     ```
-    O comando 'sudo make install' irá colocar os binários do Audacity no radar de seu sistema operacional, por essa razão, você não deve instalar o audacity dos repositórios, pois o mesmo seria sobreposto.
+    O comando 'sudo make install' irá colocar os binários do Audacity no radar de seu sistema operacional, por essa razão, você não deve ter o audacity previamente instalado, pois o mesmo seria sobreposto.
    
 ## Passo 8: Compile o módulo-plugin OpenVINO
-2. Clone o repositório do módulo-plugin OpenVINO dentro da pasta do Audacity:
+1. Voltamos a pasta raiz:
     ```bash
     cd ~/Downloads/openvino/l_openvino_toolkit_ubuntu24_2024.5.0.17288.7975fa5da0c_x86_64
+    ```   
+2. Clone o repositório do módulo-plugin OpenVINO dentro da pasta do Audacity:
+    ```bash
     git clone https://github.com/intel/openvino-plugins-ai-audacity.git
     ```   
 3. Copie o módulo para o diretório de módulos do Audacity:
