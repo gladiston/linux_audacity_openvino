@@ -117,6 +117,9 @@ O comando 'pip install conan' irá instalar o 'conan' neste ambiente do python.
 Vá até a página https://storage.openvinotoolkit.org/repositories/openvino_tokenizers/packages/2024.5.0.0/[https://storage.openvinotoolkit.org/repositories/openvino_tokenizers/packages/2024.5.0.0/] e baixe a versão correspondente ao seu Ubuntu, exemplo:
   ```bash
   wget -vc https://storage.openvinotoolkit.org/repositories/openvino_tokenizers/packages/2024.5.0.0/openvino_tokenizers_ubuntu24_2024.5.0.0_x86_64.tar.gz
+  ```
+  Extraia os arquivos:
+  ```bash
   tar zxvf openvino_tokenizers_ubuntu24_2024.5.0.0_x86_64.tar.gz
   rm -f openvino_tokenizers_ubuntu24_2024.5.0.0_x86_64.tar.gz
   ```
