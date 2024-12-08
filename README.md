@@ -14,23 +14,13 @@ Sem GPU, não vai dar certo. Por sorte, todas as plataformas atuais, incluindo a
 ```bash
 sudo lshw -C display
 ``` 
-Ententa que saber qual placa é, e saber que driver está usando, são coisas distintas.
-
-**Se tiver uma GPU Intel, execute:**
+Entenda que saber qual placa é, e saber que driver está usando, são coisas distintas. 
+Precisaremos atualizar o repositório e instalar o 'clinfo':
 ```bash
-sudo apt install -y intel-gpu-tools
+sudo apt update
+sudo apt install -y clinfo
 ```
 
-**Se tiver uma GPU AMD:**
-```bash
-sudo apt install mesa-opencl-icd
-```
-
-**Se tiver uma GPU nVIDIA, tome cautela, vou assumir o driver 535, porém pode ser outro:**
-```bash
-sudo apt install nvidia-driver-535 (ou driver correspondente)
-sudo apt install nvidia-opencl-icd-535 (ou driver correspondente)
-```
 ## Passo 2: Tenho OpenCL instalado e funcional? 
 Execute no terminal:
 ```bash
@@ -47,13 +37,39 @@ ICD loader properties
   ICD loader Version                              2.3.2
   ICD loader Profile                              OpenCL 3.0
 ```
-'**Number of platforms = 0**' é ruim porque significa que você não tem uma GPU habilitada em seu sistema para rodar opencl e será inutil prosseguir. Você deve resolver este problema antes.
+'**Number of platforms = 0**' é ruim porque significa que você não tem uma GPU habilitada em seu sistema para rodar opencl e será inutil prosseguir. 
+Vou dar algumas dicas rápidas, mas se não funcionar, tente lista de discussão, foruns e o chatgpt, segue:
+
+**Se tiver uma GPU Intel, execute:**
+```bash
+sudo apt install -y intel-gpu-tools
+```
+
+**Se tiver uma GPU AMD:**
+```bash
+sudo apt install mesa-opencl-icd
+```
+
+**Se tiver uma GPU nVIDIA, tome cautela, vou assumir o driver 535 que é o mais atualizado quando criei este HowTo, porém já pode haver outro mais recente ou apropriado:**
+```bash
+sudo apt install nvidia-driver-535 (ou driver correspondente)
+sudo apt install nvidia-opencl-icd-535 (ou driver correspondente)
+```
+Agora, tente novamente:
+```bash
+Number of platforms                               0
+
+ICD loader properties
+  ICD loader Name                                 OpenCL ICD Loader
+  ICD loader Vendor                               OCL Icd free software
+  ICD loader Version                              2.3.2
+  ICD loader Profile                              OpenCL 3.0
+```
+'**Number of platforms = 0**' significa que nãp obtivêmos êxito, tente lista de discussão, foruns e o chatgpt, mas não prossiga com este tutorial sem resolver este problema antes.
 
 ## Passo 3: Instale as dependências necessárias
 
 ```bash
-sudo apt update
-sudo apt install -y clinfo
 sudo apt install -y build-essential cmake git python3-pip libgtk2.0-dev libasound2-dev libjack-jackd2-dev uuid-dev ocl-icd-opencl-dev
 sudo apt install -y python3.12-venv
 python3 -m venv ~/.venvs/conan
