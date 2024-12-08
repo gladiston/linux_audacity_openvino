@@ -103,6 +103,7 @@ O comando 'pip install conan' irá instalar o 'conan' neste ambiente do python.
     cd l_openvino_toolkit_ubuntu24_2024.5.0.17288.7975fa5da0c_x86_64/install_dependencies/
     sudo -E ./install_openvino_dependencies.sh
     ```
+    Guarde o caninho(path) que esta agora, esta é a nossa pasta 'raiz', quase tudo que fizermos estará dentro dessa pasta.
 
 5. Configure o ambiente:
     ```bash
