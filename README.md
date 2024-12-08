@@ -154,11 +154,11 @@ Precisartemos copiá-los para: (cuidado, linha muito extensa)
 
 ## Passo 6: Compile o `whisper.cpp` com suporte ao OpenVINO
 
-1. Verifique quantos processadores serão suportados:
+1. Verifique quantos nucleos/threads serão suportados pelo compilador:
    ```bash
    echo $(nproc)
    ```
-   A resposta será 2, 4, 8, 16...64 que será a quantidade de nucleuos/threads que seu computador suportará, quanto mais, melhor. Se a resposta for vazia, APENAS SE FOR VAZIA, você terá que especificar na mão, eu usarei 4, mas se seu computador suportar mais, especifique quantos deseja usar:
+   A resposta será 2, 4, 6, 8, 10, 12..64 que será a quantidade de nucleos/threads que seu computador suportará, quanto mais, melhor. Se a resposta for vazia, **APENAS SE FOR VAZIA**, você terá que especificar na mão, eu usarei 4 no exemplo abaixo, mas se seu computador suportar mais, especifique o quanto usará:
 ```bash
    set nproc=4
    ```   
