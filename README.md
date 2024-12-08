@@ -196,17 +196,29 @@ Precisartemos copiá-los para: (cuidado, linha muito extensa)
 ## Passo 7: Compile o Audacity com o módulo OpenVINO
 
 1. Clone o repositório do Audacity:
+    Voltamos a nossa pasta raiz: 
     ```bash
     cd ~/Downloads/openvino/l_openvino_toolkit_ubuntu24_2024.5.0.17288.7975fa5da0c_x86_64
+    ```
+    Faça o download e se posiione na pasta 'audacity':
+    ```bash
     git clone https://github.com/audacity/audacity.git
     cd audacity
     git checkout release-3.7.0
     cd ..
+    ```
+    Vamos criar uma pasta de build:
+    ```bash
     mkdir audacity-build
     cd audacity-build
-    cmake -G "Unix Makefiles" ../audacity -DCMAKE_BUILD_TYPE=Release
-    
+    ```
+    Vamos compilar:
+    ```bash    
+    cmake -G "Unix Makefiles" ../audacity -DCMAKE_BUILD_TYPE=Release    
     make -j$(nproc)
+    ```
+    Vamos instalar:
+    ```bash   
     sudo make install
     ```
     O comando 'sudo make install' irá colocar os binários do Audacity no radar de seu sistema operacional, por essa razão, você não deve instalar o audacity dos repositórios, pois o mesmo seria sobreposto.
