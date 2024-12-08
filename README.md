@@ -271,7 +271,7 @@ Precisartemos copiá-los para: (cuidado, linha muito extensa)
     ```
     Exportando algumas variaveis:
     ```bash   
-    export LIBTORCH_ROOTDIR=$(pwd)/libtorch
+    export LIBTORCH_ROOTDIR=~/Downloads/openvino/l_openvino_toolkit_ubuntu24_2024.5.0.17288.7975fa5da0c_x86_64/install_dependencies/libtorch    
     export WHISPERCPP_ROOTDIR=/usr/local/lib
     export LD_LIBRARY_PATH=${WHISPERCPP_ROOTDIR}/lib:$LD_LIBRARY_PATH
     sudo ldconfig
