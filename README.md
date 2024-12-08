@@ -18,7 +18,7 @@ Entenda que saber qual placa é, e saber que driver está usando, são coisas di
 Precisaremos atualizar o repositório e instalar o 'clinfo':
 ```bash
 sudo apt update
-sudo apt install -y clinfo
+sudo apt install -y clinfo mesa-opencl-icd
 ```
 
 ## Passo 2: Tenho OpenCL instalado e funcional? 
@@ -38,16 +38,11 @@ ICD loader properties
   ICD loader Profile                              OpenCL 3.0
 ```
 '**Number of platforms = 0**' é ruim porque significa que você não tem uma GPU habilitada em seu sistema para rodar opencl e será inutil prosseguir. 
-Vou dar algumas dicas rápidas, mas se não funcionar, tente lista de discussão, foruns e o chatgpt, segue:
+Drivers para placas de video intel ou amd são opensources e geralmente são instaladas automaticamente, mas as vezes algumas coisas estão faltando, veja:
 
-**Se tiver uma GPU Intel, execute:**
+**Se tiver uma GPU Intel, talvez precise instalar este programa:**
 ```bash
 sudo apt install -y intel-gpu-tools
-```
-
-**Se tiver uma GPU AMD:**
-```bash
-sudo apt install mesa-opencl-icd
 ```
 
 **Se tiver uma GPU nVIDIA, tome cautela, vou assumir o driver 535 que é o mais atualizado quando criei este HowTo, porém já pode haver outro mais recente ou apropriado:**
@@ -65,7 +60,7 @@ ICD loader properties
   ICD loader Version                              2.3.2
   ICD loader Profile                              OpenCL 3.0
 ```
-'**Number of platforms = 0**' significa que nãp obtivêmos êxito, tente lista de discussão, foruns e o chatgpt, mas não prossiga com este tutorial sem resolver este problema antes.
+'**Number of platforms = 0**' significa que não obtivêmos êxito, tente descobrir o problema usando lista de discussão, foruns e o chatgpt, mas não prossiga com este tutorial sem resolver este problema antes.
 
 ## Passo 3: Instale as dependências necessárias
 
