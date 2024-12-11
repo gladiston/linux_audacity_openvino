@@ -82,47 +82,65 @@ O comando 'pip install conan' irá instalar o 'conan' neste ambiente do python.
 
 ## Passo 4: Baixe e instale o OpenVINO
 
-1. Crie uma pasta de download para o que iremos baixar:
+1. Vá até uma pasta onde deseje que a pasta a ser 'baixada' dê origem a subpasta do openvino, ex:
     ```bash
-    mkdir ~/Downloads/openvino
-    cd ~/Downloads/openvino
+    cd /usr/local    
     ```
     
 2. Acesse a [página de downloads do OpenVINO](https://github.com/openvinotoolkit/openvino/releases) e localize o pacote para Ubuntu 24.04 e faça o download para a pasta '~/Downloads/openvino'. Se tiver usando o Ubuntu 24.04, poderá baixá-lo pelo terminal:
     ```bash
-    wget -vc https://storage.openvinotoolkit.org/repositories/openvino/packages/2024.5/linux/l_openvino_toolkit_ubuntu24_2024.5.0.17288.7975fa5da0c_x86_64.tgz
+    sudo wget -vc https://storage.openvinotoolkit.org/repositories/openvino/packages/2024.5/linux/l_openvino_toolkit_ubuntu24_2024.5.0.17288.7975fa5da0c_x86_64.tgz
     ```
 3. Extraia o arquivo:
     ```bash
-    tar xvf l_openvino_toolkit_ubuntu24_2024.5.0.17288.7975fa5da0c_x86_64.tgz
-    rm -f l_openvino_toolkit_ubuntu24_2024.5.0.17288.7975fa5da0c_x86_64.tgz
+    sudo tar xvf l_openvino_toolkit_ubuntu24_2024.5.0.17288.7975fa5da0c_x86_64.tgz
+    sudo rm -f l_openvino_toolkit_ubuntu24_2024.5.0.17288.7975fa5da0c_x86_64.tgz
     ```
-
-4. Instale as dependências do OpenVINO:
+ 
+4. Renomeamos a pasta extraida para 'openvino'
+   ```bash
+   sudo mv l_openvino_toolkit_ubuntu24_2024.5.0.17288.7975fa5da0c_x86_64 openvino
+   ```
+5 Dê permssões globais a esta pasta:
     ```bash
-    cd l_openvino_toolkit_ubuntu24_2024.5.0.17288.7975fa5da0c_x86_64/install_dependencies/
+    sudo chmod 755 -vR /usr/local/openvino
+    sudo chown -vR $USER /usr/local/openvino
+    ```  
+   
+6. Guarde o caminho dessa pasta, ela é a nossa pasta raiz, a saber:
+   ```bash
+   /usr/local/openvino
+   ```
+   Ela será muito referenciada no restante do artigo.
+7. Instale as dependências do OpenVINO:
+    ```bash
+    cd /usr/local/openvino/install_dependencies/
     sudo -E ./install_openvino_dependencies.sh
     ```
-    Guarde o caninho(path) que esta agora, esta é a nossa pasta 'raiz', quase tudo que fizermos estará dentro dessa pasta.
-
-5. Configure o ambiente:
+    
+8. Configure o ambiente:
     ```bash
-    source ~/Downloads/openvino/l_openvino_toolkit_ubuntu24_2024.5.0.17288.7975fa5da0c_x86_64/setupvars.sh
+    source /usr/local/openvino/setupvars.sh
     ```
 
-6. Para carregar automaticamente as variáveis em novas sessões:
+9. Para carregar automaticamente as variáveis em novas sessões(opcional, use apenas se precisa lidar mais vezes com ele):
     ```bash
-    echo "source ~/Downloads/openvino/l_openvino_toolkit_ubuntu24_2024.5.0.17288.7975fa5da0c_x86_64/setupvars.sh" >> ~/.bashrc
+    echo "source /usr/local/openvino/setupvars.sh" >> ~/.bashrc
     ```
 ## Passo 5: OpenVINO Tokenizers Extension 
-Vá até a página https://storage.openvinotoolkit.org/repositories/openvino_tokenizers/packages/2024.5.0.0/[https://storage.openvinotoolkit.org/repositories/openvino_tokenizers/packages/2024.5.0.0/] e baixe a versão correspondente ao seu Ubuntu, exemplo:
+1. Vá para a pasta de referencia que esta sempre dentro da 'raiz' e :
+    ```bash
+    cd /usr/local/openvino/install_dependencies
+    ```
+2. Use o navegador e vá até a página https://storage.openvinotoolkit.org/repositories/openvino_tokenizers/packages/2024.5.0.0/[https://storage.openvinotoolkit.org/repositories/openvino_tokenizers/packages/2024.5.0.0/] e baixe a versão correspondente ao seu Ubuntu, exemplo:
   ```bash
-  wget -vc https://storage.openvinotoolkit.org/repositories/openvino_tokenizers/packages/2024.5.0.0/openvino_tokenizers_ubuntu24_2024.5.0.0_x86_64.tar.gz
+  cd /usr/local/openvino/install_dependencies/
+  sudo wget -vc https://storage.openvinotoolkit.org/repositories/openvino_tokenizers/packages/2024.5.0.0/openvino_tokenizers_ubuntu24_2024.5.0.0_x86_64.tar.gz
   ```
   Extraia os arquivos:
   ```bash
-  tar zxvf openvino_tokenizers_ubuntu24_2024.5.0.0_x86_64.tar.gz
-  rm -f openvino_tokenizers_ubuntu24_2024.5.0.0_x86_64.tar.gz
+  sudo tar zxvf openvino_tokenizers_ubuntu24_2024.5.0.0_x86_64.tar.gz
+  sudo rm -f openvino_tokenizers_ubuntu24_2024.5.0.0_x86_64.tar.gz
   ```
 Serão extraidos os seguintes arquivos na pasta runtime/lib/intel64/ e que nos interessam:
   ```
@@ -132,69 +150,81 @@ Serão extraidos os seguintes arquivos na pasta runtime/lib/intel64/ e que nos i
   ```
 Precisartemos copiá-los para: (cuidado, linha muito extensa)
   ```bash
-  cp -r ~/Downloads/openvino/l_openvino_toolkit_ubuntu24_2024.5.0.17288.7975fa5da0c_x86_64/install_dependencies/runtime/lib/intel64/* ~/Downloads/openvino/l_openvino_toolkit_ubuntu24_2024.5.0.17288.7975fa5da0c_x86_64/runtime/lib/intel64
+  sudo cp -r /usr/local/openvino/install_dependencies/runtime/lib/intel64/* \
+             /usr/local/openvino/runtime/lib/intel64
   ```
+(Recomendação) Crie e ative 'virtual env':
+```bash
+sudo python3 -m venv venv
+source venv/bin/activate
+```
 
 ## Passo 5: Baixe e instale o Libtorch
 
-1. Baixe a versão C++ do Libtorch:
+1. Vá para a pasta de referencia que esta sempre dentro da 'raiz' e :
     ```bash
-    wget https://download.pytorch.org/libtorch/cpu/libtorch-cxx11-abi-shared-with-deps-2.4.1%2Bcpu.zip
+    cd /usr/local/openvino/install_dependencies
+    ```
+    
+2. Baixe a versão C++ do Libtorch:
+    ```bash
+    cd /usr/local/openvino/install_dependencies
+    sudo wget https://download.pytorch.org/libtorch/cpu/libtorch-cxx11-abi-shared-with-deps-2.4.1%2Bcpu.zip
     ```
 
-2. Extraia o arquivo:
+3. Extraia o arquivo:
     ```bash
-    unzip libtorch-cxx11-abi-shared-with-deps-2.4.1+cpu.zip
-    rm -f libtorch-cxx11-abi-shared-with-deps-2.4.1+cpu.zip
+    sudo unzip libtorch-cxx11-abi-shared-with-deps-2.4.1+cpu.zip
+    sudo rm -f libtorch-cxx11-abi-shared-with-deps-2.4.1+cpu.zip
     ```
 
-3. Configure a variável de ambiente:
+4. Configure a variável de ambiente:
     ```bash
-    export LIBTORCH_ROOTDIR=~/Downloads/openvino/l_openvino_toolkit_ubuntu24_2024.5.0.17288.7975fa5da0c_x86_64/install_dependencies/libtorch
+    export LIBTORCH_ROOTDIR=/usr/local/openvino/install_dependencies/libtorch
     ```
-    no terminal execute:
-   ```bash
-   echo $LIBTORCH_ROOTDIR
-   ```
-   Terá um resultado parecido com teste:
-   ```bash
-   /home/gsantana/Downloads/openvino/l_openvino_toolkit_ubuntu24_2024.5.0.17288.7975fa5da0c_x86_64/install_dependencies/libtorch
-   ```
-   Anote o caminho acima, e exponha $LIBTORCH_ROOTDIR apontando para este caminho:
+   Vamos acrenscentar os caminhos acima ao nosso terminal, caso venhamos a usar de novo:
    ```bash
    nano ~/.bashrc
    ```
    E acrescente a ultima ou penultimas linhas, como preferir:
    ```bash
-   export LIBTORCH_ROOTDIR=/home/gsantana/Downloads/openvino/l_openvino_toolkit_ubuntu24_2024.5.0.17288.7975fa5da0c_x86_64/install_dependencies/libtorch
+   export LIBTORCH_ROOTDIR=/usr/local/openvino/install_dependencies/libtorch
    ```
 
 ## Passo 6: Compile o `whisper.cpp` com suporte ao OpenVINO
-
-1. Verifique quantos nucleos/threads serão suportados pelo compilador:
+1. Vá para a pasta de referencia que esta sempre dentro da 'raiz' e :
+    ```bash
+    cd /usr/local/openvino/install_dependencies
+    ```
+    
+2. Verifique quantos nucleos/threads serão suportados pelo compilador:
    ```bash
    echo $(nproc)
    ```
-   A resposta será 2, 4, 6, 8, 10, 12..64 que será a quantidade de nucleos/threads que seu computador suportará, quanto mais, melhor. Se a resposta for vazia, **APENAS SE FOR VAZIA**, você terá que especificar na mão, eu usarei 4 no exemplo abaixo, mas se seu computador suportar mais, especifique o quanto usará:
+   A resposta será 2, 4, 6, 8, 10, 12... que será a quantidade de nucleos/threads que seu computador suportará durante a compilação usando 'make -j', quanto mais, melhor. Se a resposta for vazia, **APENAS SE FOR VAZIA**, você terá que especificar na mão, eu usarei 4 no exemplo abaixo, mas se seu computador suportar mais, especifique o quanto usará:
 ```bash
    set nproc=4
-   ```   
-1. Clone o repositório:
+   ```
+ 
+3. Clone o repositório:
     ```bash
-    cd ~/Downloads/openvino/l_openvino_toolkit_ubuntu24_2024.5.0.17288.7975fa5da0c_x86_64
-    source ~/Downloads/openvino/l_openvino_toolkit_ubuntu24_2024.5.0.17288.7975fa5da0c_x86_64/setupvars.sh
-    git clone https://github.com/ggerganov/whisper.cpp
+    cd /usr/local/openvino
+    source /usr/local/openvino/setupvars.sh
+    sudo git clone https://github.com/ggerganov/whisper.cpp
+    sudo chown -vR $USER /usr/local/openvino
+    sudo git config --global --add safe.directory  /usr/local/openvino/whisper.cpp
     cd whisper.cpp
-    git checkout v1.5.4
-    cd..
+    sudo git checkout v1.5.4
+    sud bash ./models/download-ggml-model.sh base.en
+    cd ..
     ```
 
-2. Crie a pasta de build e compile:
+4. Crie a pasta de build e compile:
     ```bash
-    mkdir build
+    sudo mkdir build
     cd build
-    cmake ../whisper.cpp/ -DWHISPER_OPENVINO=ON
-    make -j$(nproc)
+    sudo cmake ../whisper.cpp/ -DWHISPER_OPENVINO=ON
+    sudo make -j$(nproc)
     sudo make install
     ```
     Os arquivos do 'whisper' que nos importam foram instalados em:
@@ -202,28 +232,88 @@ Precisartemos copiá-los para: (cuidado, linha muito extensa)
     /usr/local/lib/libwhisper.so
     /usr/local/include/ggml.h
     /usr/local/include/whisper.h
-    ``` 
-4. Configure as variáveis de ambiente:
+    ```
+    
+5. Configure as variáveis de ambiente:
     ```bash
     export WHISPERCPP_ROOTDIR=/usr/local/lib
     export LD_LIBRARY_PATH=${WHISPERCPP_ROOTDIR}/lib:$LD_LIBRARY_PATH
     sudo ldconfig
     ```
-
-## Passo 7: Compile o Audacity com o módulo OpenVINO
-
-1. Clone o repositório do Audacity:
-    Voltamos a nossa pasta raiz: 
+   Vamos acrenscentar os caminhos acima ao nosso terminal, caso venhamos a usar de novo:
+   ```bash
+   nano ~/.bashrc
+   ```
+   E acrescente na ultima ou penultimas linhas, como preferir:
+   ```bash
+   export WHISPERCPP_ROOTDIR=/usr/local/lib
+   export LD_LIBRARY_PATH=${WHISPERCPP_ROOTDIR}/lib:$LD_LIBRARY_PATH
+   ```
+## Passo 7: Baixe os fontes do Audacity:
+1. Vá para a pasta onde teremos o audacity baixado  :
     ```bash
-    cd ~/Downloads/openvino/l_openvino_toolkit_ubuntu24_2024.5.0.17288.7975fa5da0c_x86_64
+    cd /usr/local
     ```
-    Faça o download e se posiione na pasta 'audacity':
+    
+2. Clone o repositório do Audacity e se posione na pasta 'audacity':
     ```bash
-    git clone https://github.com/audacity/audacity.git
+    sudo git clone https://github.com/audacity/audacity.git
+    sudo chmod -vR 755 /usr/local/audacity
+    sudo chown -vR $USER /usr/local/audacity
+    sudo git config --global --add safe.directory /usr/local/audacity
     cd audacity
-    git checkout release-3.7.0
-    cd ..
+    sudo git reset --hard   
+    sudo git checkout release-3.7.0    
     ```
+    Por enquanto, vamos apenas baixá-los, mas num dos passos posteriores também iremos compilá-lo.
+   
+## Passo 8: Baixar e compilar o módulo-plugin OpenVINO
+1. Vá para a pasta onde vamos baixar 'openvino-plugins-ai-audacity':
+    ```bash
+    cd /usr/local/openvino
+    ``` 
+2. Clone o repositório do módulo-plugin OpenVINO dentro da pasta do Audacity:
+    ```bash
+    sudo git clone https://github.com/intel/openvino-plugins-ai-audacity.git
+    sudo chmod -vR 755 /usr/local/openvino
+    sudo chown -vR $USER /usr/local/openvino
+    sudo git config --global --add safe.directory /usr/local/openvino/openvino-plugins-ai-audacity
+    sudo git reset --hard
+    sudo git checkout release-3.7.0    
+    ```   
+3. Copie o módulo para o diretório de módulos do Audacity:
+    ```bash
+    sudo cp -r ./openvino-plugins-ai-audacity/mod-openvino \
+               /usr/local/audacity/modules/    
+    ```
+4. Edite o arquivo `CMakeLists.txt` no diretório `modules` do Audacity:
+    ```bash
+    sudo nano /usr/local/audacity/modules/CMakeLists.txt
+    ```
+
+    Adicione o seguinte linha abaixo do comentário "# Include the modules that we'll build":
+    ```bash
+    add_subdirectory(mod-openvino)
+    ```
+    O que você fez foi colocar no radar da compilação do Audacity, o modulo openvino.
+   
+## Passo 9: Compile o Audacity com o módulo OpenVINO
+1. Vá para a pasta onde baixamos o 'Audacity':
+    ```bash
+    cd /usr/local/audacity
+    ``` 
+    
+2. Vamos preparar o ambiente para compilação:
+    ```bash
+    source /usr/local/openvino/setupvars.sh
+    ```
+    Vamos exportar as variaveis de ambiente novamente caso não esteja continuando desde o principio do artigo:
+    ```bash   
+    export LIBTORCH_ROOTDIR=/usr/local/openvino/install_dependencies/libtorch
+    export WHISPERCPP_ROOTDIR=/usr/local/lib
+    export LD_LIBRARY_PATH=${WHISPERCPP_ROOTDIR}/lib:$LD_LIBRARY_PATH
+    sudo ldconfig
+    ```      
     Vamos criar uma pasta de build:
     ```bash
     mkdir audacity-build
@@ -231,90 +321,23 @@ Precisartemos copiá-los para: (cuidado, linha muito extensa)
     ```
     Vamos compilar:
     ```bash    
-    cmake -G "Unix Makefiles" ../audacity -DCMAKE_BUILD_TYPE=Release    
-    make -j$(nproc)
+    sudo cmake -G "Unix Makefiles" .. -DCMAKE_BUILD_TYPE=Release
+    sudo make -j$(nproc)
     ```
     Vamos instalar:
     ```bash   
     sudo make install
     ```
-    O comando 'sudo make install' irá colocar os binários do Audacity no radar de seu sistema operacional, por essa razão, você não deve ter o audacity previamente instalado, pois o mesmo seria sobreposto.
-   
-## Passo 8: Compile o módulo-plugin OpenVINO
-1. Voltamos a pasta raiz:
-    ```bash
-    cd ~/Downloads/openvino/l_openvino_toolkit_ubuntu24_2024.5.0.17288.7975fa5da0c_x86_64
-    ```   
-2. Clone o repositório do módulo-plugin OpenVINO dentro da pasta do Audacity:
-    ```bash
-    git clone https://github.com/intel/openvino-plugins-ai-audacity.git
-    ```   
-3. Copie o módulo para o diretório de módulos do Audacity:
-    ```bash
-    cp -r openvino-plugins-ai-audacity/mod-openvino audacity/modules/    
-    ```
-4. Edite o arquivo `CMakeLists.txt` no diretório `modules` do Audacity:
-    ```bash
-    nano audacity/modules/CMakeLists.txt
-    ```
-
-    Adicione o seguinte linha:
-    ```bash
-    add_subdirectory(mod-openvino)
-    ```
-    
-   Ficando assim no final:
-   
-   ```bash
-    foreach( MODULE ${MODULES} )
-       add_subdirectory("${MODULE}")
-    endforeach()
-
-    **add_subdirectory(mod-openvino)**
-
-    if( NOT CMAKE_SYSTEM_NAME MATCHES "Darwin" )
-       if( NOT "${CMAKE_GENERATOR}" MATCHES "Visual Studio*")
-          install( DIRECTORY "${_DEST}/modules"
-                   DESTINATION "${_PKGLIB}" )
-       endif()
-    endif()
-   ```
+    O comando **sudo make install** colocará os binários do Audacity no radar de seu sistema operacional, por essa razão, você não deve ter o audacity previamente instalado, pois o mesmo seria sobreposto. 
  
-5. Crie a pasta de build e compile o Audacity:
-    Preparando o ambiente 
+## Último passo: Ative o módulo `mod-openvino` no aplicativo Audacity
+
+1. Inicie o Audacity, neste momento ele já estará no menu do seu ambiente de desktop, mas se desejar carregá-lo no terminal:
     ```bash
-    source ~/Downloads/openvino/l_openvino_toolkit_ubuntu24_2024.5.0.17288.7975fa5da0c_x86_64/setupvars.sh
-    ```
-    Exportando algumas variaveis:
-    ```bash   
-    export LIBTORCH_ROOTDIR=~/Downloads/openvino/l_openvino_toolkit_ubuntu24_2024.5.0.17288.7975fa5da0c_x86_64/install_dependencies/libtorch    
-    export WHISPERCPP_ROOTDIR=/usr/local/lib
-    export LD_LIBRARY_PATH=${WHISPERCPP_ROOTDIR}/lib:$LD_LIBRARY_PATH
-    sudo ldconfig
-    ```    
-    Indo para a pasta  raiz:
-    ```bash   
-    cd ~/Downloads/openvino/l_openvino_toolkit_ubuntu24_2024.5.0.17288.7975fa5da0c_x86_64
-    ``` 
-    Preparando o build
-    ```bash   
-    cd audacity-build
-    cmake -G "Unix Makefiles" ../audacity -DCMAKE_BUILD_TYPE=Release
-    make -j$(nproc)
-    ```
-    Instalando:
-    ```bash       
-    sudo make install
+    /usr/local/audacity/audacity-build/Release/bin/audacity
     ```
 
-## Último passo: Ative o módulo OpenVINO no Audacity
-
-1. Inicie o Audacity:
-    ```bash
-    audacity
-    ```
-
-2. Vá em `Editar > Preferências > Módulos`.
+2. Dentro do Audacity vá em `Editar > Preferências > Módulos`.
 
 3. Encontre o módulo `mod-openvino` e altere seu estado para **Ativado**.
 
