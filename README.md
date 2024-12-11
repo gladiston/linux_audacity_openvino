@@ -345,7 +345,7 @@ source venv/bin/activate
     **env GDK_BACKEND=x11 UBUNTU_MENUPROXY=0 audacity %F**
     por
     **/usr/local/audacity/audacity-build/Release/bin/audacity %F**
-   Também é indicado marcar a opção **Executar pelo terminal** senão, não funcionará.
+   Também é imprescindivel marcar a opção **Executar pelo terminal** senão, não funcionará.
     
    
 3. Dentro do Audacity vá em `Editar > Preferências > Módulos`.
