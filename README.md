@@ -330,18 +330,28 @@ source venv/bin/activate
     ```
     O comando **sudo make install** colocará os binários do Audacity no radar de seu sistema operacional, por essa razão, você não deve ter o audacity previamente instalado, pois o mesmo seria sobreposto. 
  
-## Último passo: Ative o módulo `mod-openvino` no aplicativo Audacity
+## Último passo: Ative o módulo **mod-openvino** no aplicativo Audacity
 
-1. Inicie o Audacity, neste momento ele já estará no menu do seu ambiente de desktop, mas se desejar carregá-lo no terminal:
+1. Inicie o Audacity, neste momento ele já estará instalado em /usr/local/bin e aparecerá no menu do seu ambiente de desktop, mas por alguma razão que ainda não consegui identificar, ele só pode ser carregado dessa forma:
     ```bash
     /usr/local/audacity/audacity-build/Release/bin/audacity
     ```
+    Caso contrário uma mensagem de erro indicando 'Incapaz de carregar o modulo mod-openvino': Erro: ioctl inapropriado para dispositivo', o qual ainda não descobri, o porquê, tenho suspeitas, mas carece de pesquisa.
+    Você pode usar o programa de editor de menus chamado 'menulibre' e consertar a chamada do Audacity para o diretorio acima:
+    ```bash
+    sudo apt install menulibre
+    ```
+    Depois escolha no menu do seu sistema, menulibre e procure pelo 'Audacity', geralmente ele fica na seção 'Multimedia' e troque:
+    **env GDK_BACKEND=x11 UBUNTU_MENUPROXY=0 audacity %F**
+    por
+    **/usr/local/audacity/audacity-build/Release/bin/audacity %F** como indicado no terminal.
+    
+   
+3. Dentro do Audacity vá em `Editar > Preferências > Módulos`.
 
-2. Dentro do Audacity vá em `Editar > Preferências > Módulos`.
+4. Encontre o módulo `mod-openvino` e altere seu estado para **Ativado**.
 
-3. Encontre o módulo `mod-openvino` e altere seu estado para **Ativado**.
-
-4. Reinicie o Audacity para que as mudanças tenham efeito.
+5. Reinicie o Audacity para que as mudanças tenham efeito.
 
 ---
 
