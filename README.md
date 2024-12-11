@@ -336,15 +336,16 @@ source venv/bin/activate
     ```bash
     /usr/local/audacity/audacity-build/Release/bin/audacity
     ```
-    Caso contrário uma mensagem de erro indicando 'Incapaz de carregar o modulo mod-openvino': Erro: ioctl inapropriado para dispositivo', o qual ainda não descobri, o porquê, tenho suspeitas, mas carece de pesquisa.
-    Você pode usar o programa de editor de menus chamado 'menulibre' e consertar a chamada do Audacity para o diretorio acima:
+    Caso contrário uma mensagem de erro indicando 'Incapaz de carregar o modulo mod-openvino': Erro: ioctl inapropriado para dispositivo', o qual ainda não descobri, o porquê, tenho suspeitas de que é porque as variaveis de ambientes criadas para executar no terminal não são carregadas numa execução direta do ambiente gráfico, mas carece de mais pesquisas para confirmar.
+    Um 'workaround' é usar o programa de editor de menus chamado 'menulibre' e consertar a chamada do Audacity para o diretorio acima:
     ```bash
     sudo apt install menulibre
     ```
     Depois escolha no menu do seu sistema, menulibre e procure pelo 'Audacity', geralmente ele fica na seção 'Multimedia' e troque:
     **env GDK_BACKEND=x11 UBUNTU_MENUPROXY=0 audacity %F**
     por
-    **/usr/local/audacity/audacity-build/Release/bin/audacity %F** como indicado no terminal.
+    **/usr/local/audacity/audacity-build/Release/bin/audacity %F**
+   Também é indicado marcar a opção **Executar pelo terminal** senão, não funcionará.
     
    
 3. Dentro do Audacity vá em `Editar > Preferências > Módulos`.
