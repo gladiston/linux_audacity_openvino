@@ -152,6 +152,22 @@ Precisartemos copiá-los para: (cuidado, linha muito extensa)
     ```bash
     export LIBTORCH_ROOTDIR=~/Downloads/openvino/l_openvino_toolkit_ubuntu24_2024.5.0.17288.7975fa5da0c_x86_64/install_dependencies/libtorch
     ```
+    no terminal execute:
+   ```bash
+   echo $LIBTORCH_ROOTDIR
+   ```
+   Terá um resultado parecido com teste:
+   ```bash
+   /home/gsantana/Downloads/openvino/l_openvino_toolkit_ubuntu24_2024.5.0.17288.7975fa5da0c_x86_64/install_dependencies/libtorch
+   ```
+   Anote o caminho acima, e exponha $LIBTORCH_ROOTDIR apontando para este caminho:
+   ```bash
+   nano ~/.bashrc
+   ```
+   E acrescente a ultima ou penultimas linhas, como preferir:
+   ```bash
+   export LIBTORCH_ROOTDIR=/home/gsantana/Downloads/openvino/l_openvino_toolkit_ubuntu24_2024.5.0.17288.7975fa5da0c_x86_64/install_dependencies/libtorch
+   ```
 
 ## Passo 6: Compile o `whisper.cpp` com suporte ao OpenVINO
 
