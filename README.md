@@ -392,13 +392,18 @@ Mas se quiser insistir e forçá-lo a carregar o programa de outra forma, um 'wo
 ```bash
 sudo apt install menulibre
 ```
-Depois carregue o menulibre, e procure pelo 'Audacity', geralmente ele fica na seção 'Multimedia' e troque:  
-**env GDK_BACKEND=x11 UBUNTU_MENUPROXY=0 audacity %F**  
+Depois carregue o menulibre, e procure pelo 'Audacity', caso não haja nenhuma entrada para Audacity, então crie-o. 
+Geralmente eu acho tal atalho na seção 'Multimedia', se encontrar, troque: 
+```
+env GDK_BACKEND=x11 UBUNTU_MENUPROXY=0 audacity %F**
+```
 por  
-**$HOME/audacity-openvino/audacity-build/Release/bin/audacity**  
-Também é imprescindivel marcar a opção **Executar pelo terminal** senão, não funcionará.  
-Os gestores de menu de ambiente gráfico não gostam de variaveis como **$HOME**, então sempre que possivel troque por **/home/fulano**, onde *fulano* é o seu *login*.  
-Caso não haja nenhuma entrada para Audacity, então crie-o.  
+```
+$HOME/audacity-openvino/audacity-build/Release/bin/audacity
+```
+Os gestores de menu de ambiente gráfico não gostam de variaveis como **$HOME**, então sempre que possivel troque-a por **/home/fulano**, onde *fulano* é o seu *login*.  
+Também é imprescindivel marcar a opção **Executar pelo terminal** senão, não funcionará. 
+
 
 Conclusões finais
 --
