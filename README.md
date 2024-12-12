@@ -395,6 +395,7 @@ Depois carregue o menulibre, e procure pelo 'Audacity', geralmente ele fica na s
 por
 **$HOME/audacity-openvino/audacity-build/Release/bin/audacity**
 Também é imprescindivel marcar a opção **Executar pelo terminal** senão, não funcionará.
+Os gestores de menu de ambiente gráfico não gostam de variaveis como **$HOME**, então sempre que possivel troque por **/home/fulano**, onde *fulano* é o seu *login*.
 Caso não haja nenhuma entrada para Audacity, então crie-o.
 
 Conclusões finais
