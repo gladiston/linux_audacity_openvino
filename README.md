@@ -262,7 +262,7 @@ Se você optar por um 'sudo make install' estes arquivos estariam em:
 /usr/local/include/ggml.h
 /usr/local/include/whisper.h
 ```
-Com a compilação/instalação concluída, a compilação do Audacity encontrará o colateral compilado por meio do WHISPERCPP_ROOTDIR. Então você pode configurá-lo assim:
+Com a compilação/instalação concluída, a compilação do Audacity encontrará um erro colateral compilado por meio do WHISPERCPP_ROOTDIR. Então você pode configurá-lo assim:
 ```bash
 export WHISPERCPP_ROOTDIR=$HOME/audacity-openvino/whisper-build/installed
 export LD_LIBRARY_PATH=${WHISPERCPP_ROOTDIR}/lib:$LD_LIBRARY_PATH
@@ -309,8 +309,10 @@ make -j$(nproc)
 Quando isso estiver feito, você pode executar o Audacity assim (do diretório audacity-build):
 ```bash
 ./Release/bin/audacity
+# ou
+$HOME/audacity-openvino/audacity-build/Release/bin/audacity
 ```
-Mas ele ainda ainda não está pronto
+Mas ele ainda ainda não está totalmente pronto até que compilemos o módulo OpenVINO.
 
 Passo 13: Construção do módulo Audacity OpenVINO
 ---
