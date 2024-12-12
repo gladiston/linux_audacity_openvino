@@ -395,7 +395,7 @@ sudo apt install menulibre
 Depois carregue o menulibre, e procure pelo 'Audacity', caso não haja nenhuma entrada para Audacity, então crie-o. 
 Geralmente eu acho tal atalho na seção 'Multimedia', se encontrar, troque: 
 ```
-env GDK_BACKEND=x11 UBUNTU_MENUPROXY=0 audacity %F**
+env GDK_BACKEND=x11 UBUNTU_MENUPROXY=0 audacity %F
 ```
 por  
 ```
