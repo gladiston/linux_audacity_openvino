@@ -397,6 +397,8 @@ por
 Também é imprescindivel marcar a opção **Executar pelo terminal** senão, não funcionará.
 Caso não haja nenhuma entrada para Audacity, então crie-o.
 
+Conclusões finais
+---
 Seguindo esses passos, o plugin Intel OpenVINO estará instalado e funcionando no Audacity 3.7 no Ubuntu 24.04.
 Eu fiz o teste e garanto o resultado até data em que este artigo foi concluído.
 Gostaria de informar também que este artigo foi baseado num outro HowTo:
