@@ -290,11 +290,10 @@ Vamos informar a versão desejada que iremos compilar:
 ```bash
 cd audacity
 git checkout release-3.7.0
-cd ..
 ```
 Vamos agora fazer o build fora da pasta do audacity:
 ```bash
-cd ..
+cd ~/audacity-openvino
 mkdir audacity-build
 cd audacity-build
 ```
