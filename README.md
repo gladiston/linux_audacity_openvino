@@ -1,4 +1,3 @@
-
 Construção do Módulo OpenVINO para o Audacity no Linux (Ubuntu 24.04)
 ---
 Este tutorial descreve como instalar o plugin Intel OpenVINO no Audacity 3.7 em um ambiente Ubuntu 24.04. Com o Audacity e o plugin Intel OpenVINO, você pode potencializar tarefas de edição e processamento de áudio com inteligência artificial, como transcrição de fala para texto, supressão de ruídos, separação de fontes (vocal/instrumentos), reconhecimento de emoções e idiomas, tradução automática, e aplicação de efeitos estilizados. Além disso, o OpenVINO permite processamento em tempo real, diagnóstico acústico avançado e otimização de desempenho em hardware Intel, tornando o Audacity uma ferramenta ainda mais poderosa para produção de áudio profissional ou amadora.
@@ -388,6 +387,243 @@ $HOME/audacity-openvino/audacity-build/Release/bin/audacity
 ```
 
 Caso contrário uma mensagem de erro indicando 'Incapaz de carregar o modulo mod-openvino': Erro: ioctl inapropriado para dispositivo', poderá aparecer. Eu suspeito que executando de outra forma não funcione porque as variaveis de ambientes criadas para executar pelo terminal não existem quando tenta-se carregá-lo pelo ambiente gráfico, mas carece de mais pesquisas para confirmar.
+
+Instalação de Modelos OpenVINO
+---
+Para realmente usar esses módulos, precisamos gerar/preencher o diretório `/usr/local/lib/` com os modelos OpenVINO que os plugins irão buscar. Durante a execução, os plugins procurarão esses modelos em um diretório chamado `openvino-models`. Aqui estão os comandos que você pode usar para criar esse diretório e preenchê-lo com os modelos necessários.
+
+⚠️ **Atenção**: Os modelos que esses comandos irão baixar são muito grandes (vários GBs). Tenha cuidado se você estiver usando uma conexão com limite de dados.  
+
+💡 **Sugestão**: Independentemente de estar em uma conexão limitada, se você tiver um dispositivo de armazenamento extra (pen drive ou SSD em um gabinete com 64 GB ou mais), talvez seja interessante salvar esses arquivos de modelo, caso deseje construir tudo isso em outro lugar no futuro. 
+## MusicGen
+1. Vamos para o diretorio 'base':
+```bash
+cd ~/audacity-openvino
+```
+2. Criar um diretório vazio openvino-models para começar
+```bash
+mkdir openvino-models
+```
+Criar uma pasta para o MusicGen:
+4. Instalar o Git LFS (Large File Storage), necessário para repositórios do Hugging Face
+```bash
+sudo apt install git-lfs
+```
+5. Criar uma pasta para o MusicGen:
+```bash
+mkdir openvino-models/musicgen
+```
+6. Clonar o repositório do Hugging Face:
+```bash
+git clone https://huggingface.co/Intel/musicgen-static-openvino
+```
+7. Descompactar o conjunto base de modelos na pasta do MusicGen:
+```bash
+unzip musicgen-static-openvino/musicgen_small_enc_dec_tok_openvino_models.zip -d ~/audacity-openvino/openvino-models/musicgen
+```
+8. Descompactar os modelos específicos para mono:
+```bash
+unzip musicgen-static-openvino/musicgen_small_mono_openvino_models.zip -d ~/audacity-openvino/openvino-models/musicgen
+```
+9. Descompactar os modelos específicos para estéreo:
+```bash
+unzip musicgen-static-openvino/musicgen_small_stereo_openvino_models.zip -d ~/audacity-openvino/openvino-models/musicgen
+```
+10. Excluir o repositório clonado após a extração:
+```bash
+rm -rf musicgen-static-openvino
+```
+
+## Whisper Transcription
+1. Vamos para o diretorio 'base':
+```bash
+cd ~/audacity-openvino
+```
+2. Clonar o repositório do Hugging Face:
+```bash
+git clone https://huggingface.co/Intel/whisper.cpp-openvino-models
+```
+3. Extrair pacotes de modelos individuais para o diretório `openvino-models`:
+```bash
+unzip whisper.cpp-openvino-models/ggml-base-models.zip -d ~/audacity-openvino/openvino-models
+```
+```bash
+unzip whisper.cpp-openvino-models/ggml-small-models.zip -d ~/audacity-openvino/openvino-models
+```
+```bash
+unzip whisper.cpp-openvino-models/ggml-small.en-tdrz-models.zip -d ~/audacity-openvino/openvino-models
+```
+4. Excluir o repositório clonado após a extração:
+```bash
+rm -rf whisper.cpp-openvino-models
+```
+## Separação de Música
+1. Vamos para o diretorio 'base':
+```bash
+cd ~/audacity-openvino
+```
+2. Clonar o repositório do Hugging Face:
+```bash
+git clone https://huggingface.co/Intel/demucs-openvino
+```
+3. Copiar os arquivos IR do Demucs OpenVINO:
+```bash
+cp demucs-openvino/htdemucs_v4.bin ~/audacity-openvino/openvino-models
+cp demucs-openvino/htdemucs_v4.xml ~/audacity-openvino/openvino-models
+```
+4. Excluir o repositório clonado após a extração:
+```bash
+rm -rf demucs-openvino
+```
+
+## Supressão de Ruído
+1. Vamos para o diretorio `openvino-models`:
+```bash
+cd ~/audacity-openvino/openvino-models
+```
+2. Clonar o repositório DeepFilterNet no Hugging Face:
+```bash
+git clone https://huggingface.co/Intel/deepfilternet-openvino
+```
+3. Extrair os modelos DeepFilterNet2:
+```bash
+unzip deepfilternet-openvino/deepfilternet2.zip -d ~/audacity-openvino/openvino-models
+```
+4. Extrair os modelos DeepFilterNet3:
+```bash
+unzip deepfilternet-openvino/deepfilternet3.zip -d ~/audacity-openvino/openvino-models
+```
+5. Retornamos ao diretorio `openvino-models`:
+```bash
+cd ~/audacity-openvino/openvino-models
+```
+6. Baixar os arquivos IR do modelo `noise-suppression-denseunet-ll-0001`:
+```bash
+wget https://storage.openvinotoolkit.org/repositories/open_model_zoo/2023.0/models_bin/1/noise-suppression-denseunet-ll-0001/FP16/noise-suppression-denseunet-ll-0001.xml
+wget https://storage.openvinotoolkit.org/repositories/open_model_zoo/2023.0/models_bin/1/noise-suppression-denseunet-ll-0001/FP16/noise-suppression-denseunet-ll-0001.bin
+```
+7. Vamos retornar novamente para o diretorio `openvino-models`:
+```bash
+cd ~/audacity-openvino/openvino-models
+tree -d
+```
+
+Copiando superestrutura
+---
+
+Após realizar todos os passos, a estrutura funcional do diretório openvino-models ficará assim:
+```
+.
+├── deepfilternet2
+├── deepfilternet3
+├── deepfilternet-openvino
+└── musicgen
+    ├── mono
+    └── stereo
+
+7 directories
+
+```
+Para termos uma ideia melhor da disposição geral dos arquivos, executemos:
+```bash
+tree -h
+```
+E então teremos uma ideia geral mais abrangente:
+```
+[ 830]  .
+├── [ 112]  deepfilternet2
+│   ├── [3.2M]  df_dec.bin
+│   ├── [112K]  df_dec.xml
+│   ├── [2.5M]  enc.bin
+│   ├── [175K]  enc.xml
+│   ├── [3.2M]  erb_dec.bin
+│   └── [181K]  erb_dec.xml
+├── [ 112]  deepfilternet3
+│   ├── [3.2M]  df_dec.bin
+│   ├── [123K]  df_dec.xml
+│   ├── [1.8M]  enc.bin
+│   ├── [186K]  enc.xml
+│   ├── [3.1M]  erb_dec.bin
+│   └── [185K]  erb_dec.xml
+├── [ 126]  deepfilternet-openvino
+│   ├── [8.2M]  deepfilternet2.zip
+│   ├── [7.6M]  deepfilternet3.zip
+│   └── [2.1K]  README.md
+├── [141M]  ggml-base.bin
+├── [ 39M]  ggml-base-encoder-openvino.bin
+├── [281K]  ggml-base-encoder-openvino.xml
+├── [465M]  ggml-small.bin
+├── [168M]  ggml-small-encoder-openvino.bin
+├── [804K]  ggml-small-encoder-openvino.xml
+├── [465M]  ggml-small.en-tdrz.bin
+├── [168M]  ggml-small.en-tdrz-encoder-openvino.bin
+├── [512K]  ggml-small.en-tdrz-encoder-openvino.xml
+├── [ 96M]  htdemucs_v4.bin
+├── [1.8M]  htdemucs_v4.xml
+├── [ 610]  musicgen
+│   ├── [1.9M]  attention_mask_from_prepare_4d_causal_10s.raw
+│   ├── [492K]  attention_mask_from_prepare_4d_causal_5s.raw
+│   ├── [258K]  encodec_20s.xml
+│   ├── [258K]  encodec_5s.xml
+│   ├── [ 56M]  encodec_combined_weights.bin
+│   ├── [441K]  encodec_encoder_10s.xml
+│   ├── [441K]  encodec_encoder_5s.xml
+│   ├── [ 56M]  encodec_encoder_combined_weights.bin
+│   ├── [ 978]  mono
+│   │   ├── [ 16M]  embed_tokens.bin
+│   │   ├── [ 14K]  embed_tokens.xml
+│   │   ├── [3.0M]  enc_to_dec_proj.bin
+│   │   ├── [2.7K]  enc_to_dec_proj.xml
+│   │   ├── [ 96M]  initial_cross_attn_kv_producer.bin
+│   │   ├── [173K]  initial_cross_attn_kv_producer.xml
+│   │   ├── [ 16M]  lm_heads.bin
+│   │   ├── [ 11K]  lm_heads.xml
+│   │   ├── [672M]  musicgen_decoder_combined_weights.bin
+│   │   ├── [337M]  musicgen_decoder_combined_weights_int8.bin
+│   │   ├── [2.5M]  musicgen_decoder_static0_10s.xml
+│   │   ├── [2.5M]  musicgen_decoder_static0_5s.xml
+│   │   ├── [3.0M]  musicgen_decoder_static_batch1_int8.xml
+│   │   ├── [2.5M]  musicgen_decoder_static_batch1.xml
+│   │   ├── [3.0M]  musicgen_decoder_static_int8.xml
+│   │   ├── [2.5M]  musicgen_decoder_static.xml
+│   │   └── [8.0M]  sinusoidal_positional_embedding_weights_2048_1024.raw
+│   ├── [775K]  musicgen-small-tokenizer.bin
+│   ├── [5.7K]  musicgen-small-tokenizer.xml
+│   ├── [ 978]  stereo
+│   │   ├── [ 32M]  embed_tokens.bin
+│   │   ├── [ 28K]  embed_tokens.xml
+│   │   ├── [3.0M]  enc_to_dec_proj.bin
+│   │   ├── [2.7K]  enc_to_dec_proj.xml
+│   │   ├── [192M]  initial_cross_attn_kv_producer.bin
+│   │   ├── [145K]  initial_cross_attn_kv_producer.xml
+│   │   ├── [ 32M]  lm_heads.bin
+│   │   ├── [ 21K]  lm_heads.xml
+│   │   ├── [672M]  musicgen_decoder_combined_weights.bin
+│   │   ├── [337M]  musicgen_decoder_combined_weights_int8.bin
+│   │   ├── [2.5M]  musicgen_decoder_static0_10s.xml
+│   │   ├── [2.5M]  musicgen_decoder_static0_5s.xml
+│   │   ├── [3.0M]  musicgen_decoder_static_batch1_int8.xml
+│   │   ├── [2.5M]  musicgen_decoder_static_batch1.xml
+│   │   ├── [3.0M]  musicgen_decoder_static_int8.xml
+│   │   ├── [2.5M]  musicgen_decoder_static.xml
+│   │   └── [8.0M]  sinusoidal_positional_embedding_weights_2048_1024.raw
+│   ├── [209M]  t5.bin
+│   └── [550K]  t5.xml
+├── [8.2M]  noise-suppression-denseunet-ll-0001.bin
+└── [674K]  noise-suppression-denseunet-ll-0001.xml
+
+7 directories, 74 files
+```
+Se a estrutura acima é exatamente o que você tem, então está tudo preparado.
+1. Vamos para o diretorio 'base':
+```bash
+cd ~/audacity-openvino
+```
+
+Todos estes arquivos em `openvino-models` terão de ser transferidos para `/usr/local/lib`, então execute:
+```bash
+sudo cp -R openvino-models /usr/local/lib/
+```
 
 Colocando atalho no menu do sistema
 ---
