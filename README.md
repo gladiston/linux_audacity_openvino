@@ -374,7 +374,7 @@ make -j$(nproc)
 ```
 Se tudo for compilado corretamente, você verá mod-openvino.so em ./Release/lib/audacity/modules/
 
-Executando o audacity pela primeira vez
+Passo 14: Executando o audacity pela primeira vez
 ---
 Você já pode prosseguir e executar o audacity, mas somente desse diretorio:
 ```bash
@@ -388,7 +388,7 @@ $HOME/audacity-openvino/audacity-build/Release/bin/audacity
 
 Caso contrário uma mensagem de erro indicando 'Incapaz de carregar o modulo mod-openvino': Erro: ioctl inapropriado para dispositivo', poderá aparecer. Eu suspeito que executando de outra forma não funcione porque as variaveis de ambientes criadas para executar pelo terminal não existem quando tenta-se carregá-lo pelo ambiente gráfico, mas carece de mais pesquisas para confirmar.
 
-Instalação de Modelos OpenVINO
+Passo 15: Instalação de Modelos OpenVINO
 ---
 Para realmente usar esses módulos, precisamos gerar/preencher o diretório `/usr/local/lib/` com os modelos OpenVINO que os plugins irão buscar. Durante a execução, os plugins procurarão esses modelos em um diretório chamado `openvino-models`. Aqui estão os comandos que você pode usar para criar esse diretório e preenchê-lo com os modelos necessários.
 
@@ -502,16 +502,19 @@ cd ~/audacity-openvino/openvino-models
 wget https://storage.openvinotoolkit.org/repositories/open_model_zoo/2023.0/models_bin/1/noise-suppression-denseunet-ll-0001/FP16/noise-suppression-denseunet-ll-0001.xml
 wget https://storage.openvinotoolkit.org/repositories/open_model_zoo/2023.0/models_bin/1/noise-suppression-denseunet-ll-0001/FP16/noise-suppression-denseunet-ll-0001.bin
 ```
-7. Vamos retornar novamente para o diretorio `openvino-models`:
+
+Passo 16: Copiando superestrutura
+---
+1. Vamos retornar novamente para o diretorio `openvino-models`:
 ```bash
 cd ~/audacity-openvino/openvino-models
 tree -d
 ```
-
-Copiando superestrutura
----
-
-Após realizar todos os passos, a estrutura funcional do diretório openvino-models ficará assim:
+2. Vamos olhar a arvore de diretórios:
+```bash
+tree -d
+```
+3. Após realizar todos os passos, a estrutura funcional do diretório `openvino-models` ficará assim:
 ```
 .
 ├── deepfilternet2
@@ -524,7 +527,7 @@ Após realizar todos os passos, a estrutura funcional do diretório openvino-mod
 7 directories
 
 ```
-Para termos uma ideia melhor da disposição geral dos arquivos, executemos:
+4. Para termos uma ideia melhor da disposição geral dos arquivos/pastas e seus tamanhos, executemos:
 ```bash
 tree -h
 ```
@@ -615,19 +618,23 @@ E então teremos uma ideia geral mais abrangente:
 7 directories, 74 files
 ```
 Se a estrutura acima é exatamente o que você tem, então está tudo preparado.
-1. Vamos para o diretorio 'base':
+5. Vamos para o diretorio 'base':
 ```bash
 cd ~/audacity-openvino
 ```
 
-Todos estes arquivos em `openvino-models` terão de ser transferidos para `/usr/local/lib`, então execute:
+6. Todos estes arquivos em `openvino-models` terão de ser transferidos para `/usr/local/lib`, então execute:
 ```bash
 sudo cp -R openvino-models /usr/local/lib/
 ```
 
 Colocando atalho no menu do sistema
 ---
-Conforme mencionado antes, o Audacity só funcionará de acordo com o OpenVINO se o executar a partir do terminal, mas consegui um 'workaround' que resolverá essa situação, use ou instale o programa chamado 'menulibre', ele permite acrescentar ou editar o menu do seu ambiente gráfico, ele usa os padrões XDG então não importa muito qual ambiente grafico esteje usando, irá funcionar.
+Conforme mencionado antes, o Audacity só funcionará de acordo com o OpenVINO se o executar a partir do terminal, assim:
+```bash
+$HOME/audacity-openvino/audacity-build/Release/bin/audacity
+```
+E não rodará diretamente do seu ambiente gráfico, mas consegui um 'workaround' que resolverá essa situação, se você quiser prosseguir então use ou instale o programa chamado 'menulibre', ele permite acrescentar ou editar o menu do seu ambiente gráfico, ele usa os padrões XDG então não importa muito qual ambiente grafico esteje usando, irá funcionar.
 
 Vamos isntalar o menulibre, caso ele ainda não exista em seu sistema:
 ```bash
