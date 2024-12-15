@@ -389,7 +389,11 @@ $HOME/audacity-openvino/audacity-build/Release/bin/audacity
 
 Caso contrário uma mensagem de erro indicando 'Incapaz de carregar o modulo mod-openvino': Erro: ioctl inapropriado para dispositivo', poderá aparecer. Eu suspeito que executando de outra forma não funcione porque as variaveis de ambientes criadas para executar pelo terminal não existem quando tenta-se carregá-lo pelo ambiente gráfico, mas carece de mais pesquisas para confirmar.
 
-Mas se quiser insistir e forçá-lo a carregar o programa de outra forma, um 'workaround' que criei poderá fazer isso funcionar, use ou instale o programa chamado 'menulibre', ele permite acrescentar ou editar o menu do ambiente gráfico, para instalar:
+Colocando atalho no menu do sistema
+---
+Conforme mencionado antes, o Audacity só funcionará de acordo com o OpenVINO se o executar a partir do terminal, mas consegui um 'workaround' que resolverá essa situação, use ou instale o programa chamado 'menulibre', ele permite acrescentar ou editar o menu do seu ambiente gráfico, ele usa os padrões XDG então não importa muito qual ambiente grafico esteje usando, irá funcionar.
+
+Vamos isntalar o menulibre, caso ele ainda não exista em seu sistema:
 ```bash
 sudo apt install menulibre
 ```
