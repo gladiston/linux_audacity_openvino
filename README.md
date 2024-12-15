@@ -356,18 +356,20 @@ endforeach()
 ```bash
 # OpenVINO
 source $HOME/audacity-openvino/l_openvino_toolkit_ubuntu24_2024.5.0.17288.7975fa5da0c_x86_64/setupvars.sh
-# Whisper.cpp
+```
+6. Whisper.cpp
+```bash
 export LIBTORCH_ROOTDIR=$HOME/audacity-openvino/libtorch
 ```
-6. Estamos prontos para recompilar novamente o Audacity
+7. Estamos prontos para recompilar novamente o Audacity
 ```bash
 cd ~/audacity-openvino/audacity-build
 ```
-7. Vamos rodar o processo de cnake novamente
+8. Vamos rodar o processo de cnake novamente
 ```bash
 cmake -G "Unix Makefiles" ../audacity -DCMAKE_BUILD_TYPE=Release
 ```
-8. Novamente o make...
+9. Novamente o make...
 ```bash
 make -j$(nproc)
 ```
