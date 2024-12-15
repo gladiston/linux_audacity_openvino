@@ -14,13 +14,19 @@ Antes de entrar nos detalhes, aqui está uma visão geral das etapas:
 
 **Nota:** Ao longo da documentação, utilizamos `~/audacity-openvino/` como diretório de trabalho padrão, onde os pacotes e componentes serão baixados e o projeto será construído. Sinta-se à vontade para usar essa estrutura ou configurar um diretório em outro local do seu sistema com nomes que funcionem melhor para você. Apenas certifique-se de ajustar os comandos conforme necessário.
 
-Passo 1: Tenho uma GPU?
+Passo 1: Tenho um processador Intel?
 ---
-Sem GPU, não vai dar certo. Por sorte, todas as plataformas atuais, incluindo as Intel Onboard são GPUs também. Então confira qual a sua GPU e instale os drivers adequados. Você pode descobrir que placa de vídeo possui simplesmente executando no terminal:
+1. O OpenVINO é um produto Intel e sem o proessador da marca, não vai dar certo. Você pode descobrir se seu computador atende a este requisito exeutando no terminal:
 ```bash
-sudo lshw -C display
-``` 
-Entenda que saber qual placa é, e saber que driver está usando, são coisas distintas. 
+lscpu | grep "Vendor ID"
+```
+O resultado deverá ser algo como:
+```bash
+vendor_id	: GenuineIntel
+(...)
+```
+
+2. Se não for Intel, é possivel que não funcione, caso queira prosseguir assim mesmo, fique a vontade.
 Precisaremos atualizar o repositório e instalar o 'clinfo':
 ```bash
 sudo apt update
