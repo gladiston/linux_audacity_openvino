@@ -203,6 +203,10 @@ tar zxvf l_openvino_toolkit_ubuntu24_2024.5.0.17288.7975fa5da0c_x86_64.tgz
 ```bash
 source $HOME/audacity-openvino/l_openvino_toolkit_ubuntu24_2024.5.0.17288.7975fa5da0c_x86_64/setupvars.sh
 ```
+O Audacity+OpenVINO só funcionará com o ambiente preparado, não se esqueça disso quando tentar executá-lo e não funcionr. Por isso, se usa muito o Audacity e fará uso do OpenVINO é recomendável colocar a linha acima dentro do ~/.bashrc, execute:
+```bash
+echo source $HOME/audacity-openvino/l_openvino_toolkit_ubuntu24_2024.5.0.17288.7975fa5da0c_x86_64/setupvars.sh>>~/.bashrc
+```
 
 5. Isso é necessário para os procedimentos a seguir, depois removemos o arquivo baixado:
 ```bash
