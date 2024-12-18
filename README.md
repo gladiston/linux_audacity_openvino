@@ -624,7 +624,8 @@ E então teremos uma ideia geral mais abrangente:
 
 7 directories, 74 files
 ```
-Se a estrutura acima é exatamente o que você tem, então está tudo preparado.
+Se a estrutura acima é exatamente o que você tem, então está tudo preparado.  
+
 5. Vamos para o diretorio 'base':
 ```bash
 cd ~/audacity-openvino
