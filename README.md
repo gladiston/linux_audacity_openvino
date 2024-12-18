@@ -81,7 +81,7 @@ Passo 3: Instale as dependências necessárias
 
 ```bash
 sudo apt install -y build-essential cmake git python3-pip libgtk2.0-dev libasound2-dev libjack-jackd2-dev uuid-dev ocl-icd-opencl-dev
-sudo apt install -y python3.12-venv
+sudo apt install -y tree python3.12-venv
 ```
 
 Passo 4: Vamos criar o dretorio base
