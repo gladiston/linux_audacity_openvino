@@ -293,27 +293,34 @@ git clone https://github.com/audacity/audacity.git
 cd audacity
 git checkout release-3.7.0
 ```
-5. Vamos agora fazer o build fora da pasta do audacity:
+5. Veja as versões disponiveis:
+```bash
+git branch -r
+```
+6. E escolha uma versão igual ou superior a 3.7:
+```bash
+git checkout release-3.7.0
+```
+7. Vamos agora fazer o build fora da pasta do audacity:
 ```bash
 cd ~/audacity-openvino
 ```
 ```bash
 mkdir audacity-build
-cd audacity-build
 ```
 ```bash
 cd audacity-build
 ```
 
-6. Vamos compilá-lo(vá tomar um café, porque será um pouco demorado):
+8. Vamos compilá-lo(vá tomar um café, porque será um pouco demorado):
 ```bash
 cmake -G "Unix Makefiles" ../audacity -DCMAKE_BUILD_TYPE=Release
 ```
-7. Depois vamos a uma construção:
+9. Depois vamos a uma construção:
 ```bash
 make -j$(nproc)
 ```
-8. Quando isso estiver feito, você pode executar o Audacity assim (do diretório audacity-build):
+10. Quando isso estiver feito, você pode executar o Audacity assim (do diretório audacity-build):
 ```bash
 ./Release/bin/audacity
 # ou
