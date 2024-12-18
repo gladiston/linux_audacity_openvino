@@ -232,9 +232,14 @@ git checkout v1.5.4
 4. E agora, vamos criar pasta de construção e compilá-lo:
 ```bash
 cd ..
+```
+```bash
 mkdir whisper-build
+```
+```bash
 cd whisper-build
 ```
+
 5. Vamos agora rodar o cmake, especificadno que desejamos habiitar o suporte ao OpenVINO:
 ```bash
 cmake ../whisper.cpp/ -DWHISPER_OPENVINO=ON
@@ -291,9 +296,15 @@ git checkout release-3.7.0
 5. Vamos agora fazer o build fora da pasta do audacity:
 ```bash
 cd ~/audacity-openvino
+```
+```bash
 mkdir audacity-build
 cd audacity-build
 ```
+```bash
+cd audacity-build
+```
+
 6. Vamos compilá-lo(vá tomar um café, porque será um pouco demorado):
 ```bash
 cmake -G "Unix Makefiles" ../audacity -DCMAKE_BUILD_TYPE=Release
