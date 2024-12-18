@@ -133,7 +133,7 @@ cd ~/audacity-openvino/openvino_toolkit/install_dependencies
 ```bash
 wget -vc https://storage.openvinotoolkit.org/repositories/openvino_tokenizers/packages/2024.5.0.0/openvino_tokenizers_ubuntu24_2024.5.0.0_x86_64.tar.gz
 ```
-Extraia os arquivos:
+3. Extraia os arquivos:
 ```bash
 tar zxvf openvino_tokenizers_ubuntu24_2024.5.0.0_x86_64.tar.gz
 ```
@@ -143,12 +143,12 @@ Serão extraidos os seguintes arquivos na pasta runtime/lib/intel64/ e que nos i
 runtime/lib/intel64/libcore_tokenizers.so
 runtime/lib/intel64/libopenvino_tokenizers.so
 ```
-Precisartemos copiá-los para: (cuidado, linha muito extensa)
+4. Precisartemos copiá-los para: (cuidado, linha muito extensa)
 ```bash
 cp -r ~/audacity-openvino/openvino_toolkit/install_dependencies/runtime/lib/intel64/* \
       ~/audacity-openvino/openvino_toolkit/runtime/lib/intel64
 ```
-Remova o arquivo baixado:
+5. Remova o arquivo baixado:
 ```bash
 rm -f openvino_tokenizers_ubuntu24_2024.5.0.0_x86_64.tar.gz
 ```
@@ -207,16 +207,16 @@ cd ~/audacity-openvino
 ```bash
 wget -vc https://storage.openvinotoolkit.org/repositories/openvino/packages/2024.5/linux/l_openvino_toolkit_ubuntu24_2024.5.0.17288.7975fa5da0c_x86_64.tgz
 ```
-Descompactamos o arquivo:
+3. Descompactamos o arquivo:
 ```bash
 tar zxvf l_openvino_toolkit_ubuntu24_2024.5.0.17288.7975fa5da0c_x86_64.tgz
 ```
-Preparamos o ambiente:
+4. Preparamos o ambiente:
 ```bash
 source $HOME/audacity-openvino/l_openvino_toolkit_ubuntu24_2024.5.0.17288.7975fa5da0c_x86_64/setupvars.sh
 ```
 
-Isso é necessário para os procedimentos a seguir, depois removemos o arquivo baixado:
+5. Isso é necessário para os procedimentos a seguir, depois removemos o arquivo baixado:
 ```bash
 rm -f l_openvino_toolkit_ubuntu24_2024.5.0.17288.7975fa5da0c_x86_64.tgz
 ```
@@ -228,46 +228,46 @@ Passo 11: Construção de Subcomponentes
 ```bash
 cd ~/audacity-openvino
 ```
-Agora vamos construir o `whisper.cpp`. Primeiro vamos baixá-lo:
+2. Agora vamos construir o `whisper.cpp`. Primeiro vamos baixá-lo:
 ```bash
 git clone https://github.com/ggerganov/whisper.cpp
 ```
-Depois estabelecer a versão que desejamos do whisper.cpp:
+3. Depois estabelecer a versão que desejamos do whisper.cpp:
 ```bash
 cd whisper.cpp
 git checkout v1.5.4
 ```
-E agora, vamos criar pasta de construção e compilá-lo:
+4. E agora, vamos criar pasta de construção e compilá-lo:
 ```bash
 cd ..
 mkdir whisper-build
 cd whisper-build
 ```
-Vamos agora rodar o cmake, especificadno que desejamos habiitar o suporte ao OpenVINO:
+5. Vamos agora rodar o cmake, especificadno que desejamos habiitar o suporte ao OpenVINO:
 ```bash
 cmake ../whisper.cpp/ -DWHISPER_OPENVINO=ON
 ```
-Agora fazemos o processo de build:
+6. Agora fazemos o processo de build:
 ```bash
 make -j$(nproc)
 ```
-Ao invés do 'sudo make install' e fazer uma instalação global para o sistema, vamos gerar os binários em './installed':
+7. Ao invés do 'sudo make install' e fazer uma instalação global para o sistema, vamos gerar os binários em './installed':
 ```bash
 cmake --install . --config Release --prefix ./installed
 ```
-Notará que em './installed', os arquivos do 'whisper' que nos importam são:
+8. Notará que em './installed', os arquivos do 'whisper' que nos importam são:
 ```
 /installed/lib/libwhisper.so
 /installed/include/ggml.h
 /installed/include/whisper.h
 ```
-Se você optar por um 'sudo make install' estes arquivos estariam em:
+9. Se você optar por um 'sudo make install' estes arquivos estariam em:
 ```
 /usr/local/lib/libwhisper.so
 /usr/local/include/ggml.h
 /usr/local/include/whisper.h
 ```
-Com a compilação/instalação concluída, a compilação do Audacity encontrará um erro colateral compilado por meio do WHISPERCPP_ROOTDIR. Então você pode configurá-lo assim:
+10. Com a compilação/instalação concluída, a compilação do Audacity encontrará um erro colateral compilado por meio do WHISPERCPP_ROOTDIR. Então você pode configurá-lo assim:
 ```bash
 export WHISPERCPP_ROOTDIR=$HOME/audacity-openvino/whisper-build/installed
 export LD_LIBRARY_PATH=${WHISPERCPP_ROOTDIR}/lib:$LD_LIBRARY_PATH
@@ -287,30 +287,30 @@ sudo apt-get install -y build-essential cmake git python3-pip
 sudo apt-get install -y libgtk2.0-dev libasound2-dev libjack-jackd2-dev uuid-dev
 sudo pip3 install conan
 ```
-Vamos clonar o repositorio do Audacity:
+3. Vamos clonar o repositorio do Audacity:
 ```bash
 git clone https://github.com/audacity/audacity.git
 ```
-Vamos informar a versão desejada que iremos compilar:
+4. Vamos informar a versão desejada que iremos compilar:
 ```bash
 cd audacity
 git checkout release-3.7.0
 ```
-Vamos agora fazer o build fora da pasta do audacity:
+5. Vamos agora fazer o build fora da pasta do audacity:
 ```bash
 cd ~/audacity-openvino
 mkdir audacity-build
 cd audacity-build
 ```
-Vamos compilá-lo(vá tomar um café, porque será um pouco demorado):
+6. Vamos compilá-lo(vá tomar um café, porque será um pouco demorado):
 ```bash
 cmake -G "Unix Makefiles" ../audacity -DCMAKE_BUILD_TYPE=Release
 ```
-Depois vamos a uma construção:
+7. Depois vamos a uma construção:
 ```bash
 make -j$(nproc)
 ```
-Quando isso estiver feito, você pode executar o Audacity assim (do diretório audacity-build):
+8. Quando isso estiver feito, você pode executar o Audacity assim (do diretório audacity-build):
 ```bash
 ./Release/bin/audacity
 # ou
