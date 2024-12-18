@@ -60,8 +60,8 @@ sudo apt install -y intel-gpu-tools
 
 **Se tiver uma GPU nVIDIA, tome cautela, vou assumir o driver 535 que é o mais atualizado quando criei este HowTo, porém já pode haver outro mais recente ou apropriado:**
 ```bash
-sudo apt install nvidia-driver-535 (ou driver correspondente)
-sudo apt install nvidia-opencl-icd-535 (ou driver correspondente)
+sudo apt install -y nvidia-driver-535 (ou driver correspondente)
+sudo apt install -y nvidia-opencl-icd-535 (ou driver correspondente)
 ```
 Agora, tente novamente:
 ```bash
@@ -186,7 +186,7 @@ cd ~/audacity-openvino
 ```
 2. Para otimizar o desempenho em GPUs, utilizamos o OpenCL com APIs de interoperabilidade para o OpenVINO. Portanto, precisamos instalar os pacotes de desenvolvimento do OpenCL:
 ```bash
-sudo apt install ocl-icd-opencl-dev
+sudo apt install -y ocl-icd-opencl-dev
 ```
 3. Verifique quantos nucleos/threads serão suportados pelo compilador:
 ```bash
@@ -283,8 +283,8 @@ cd ~/audacity-openvino
 ```
 2. Vamos instalar as dependencias para poder compiar o Audacity:
 ```bash
-sudo apt-get install -y build-essential cmake git python3-pip
-sudo apt-get install -y libgtk2.0-dev libasound2-dev libjack-jackd2-dev uuid-dev
+sudo apt install -y build-essential cmake git python3-pip
+sudo apt install -y libgtk2.0-dev libasound2-dev libjack-jackd2-dev uuid-dev
 sudo pip3 install conan
 ```
 3. Vamos clonar o repositorio do Audacity:
@@ -413,7 +413,7 @@ mkdir openvino-models
 Criar uma pasta para o MusicGen:
 4. Instalar o Git LFS (Large File Storage), necessário para repositórios do Hugging Face
 ```bash
-sudo apt install git-lfs
+sudo apt install -y git-lfs
 ```
 5. Criar uma pasta para o MusicGen:
 ```bash
@@ -506,6 +506,8 @@ cd ~/audacity-openvino/openvino-models
 6. Baixar os arquivos IR do modelo `noise-suppression-denseunet-ll-0001`:
 ```bash
 wget https://storage.openvinotoolkit.org/repositories/open_model_zoo/2023.0/models_bin/1/noise-suppression-denseunet-ll-0001/FP16/noise-suppression-denseunet-ll-0001.xml
+```
+```bash
 wget https://storage.openvinotoolkit.org/repositories/open_model_zoo/2023.0/models_bin/1/noise-suppression-denseunet-ll-0001/FP16/noise-suppression-denseunet-ll-0001.bin
 ```
 
@@ -644,7 +646,7 @@ E não rodará diretamente do seu ambiente gráfico, mas consegui um 'workaround
 
 Vamos isntalar o menulibre, caso ele ainda não exista em seu sistema:
 ```bash
-sudo apt install menulibre
+sudo apt install -y menulibre
 ```
 Depois carregue o menulibre, e procure pelo 'Audacity', caso não haja nenhuma entrada para Audacity, então crie-o. 
 Geralmente eu acho tal atalho na seção 'Multimedia', se encontrar, troque: 
