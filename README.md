@@ -505,10 +505,10 @@ cd ~/audacity-openvino/openvino-models
 ```
 6. Baixar os arquivos IR do modelo `noise-suppression-denseunet-ll-0001`:
 ```bash
-wget https://storage.openvinotoolkit.org/repositories/open_model_zoo/2023.0/models_bin/1/noise-suppression-denseunet-ll-0001/FP16/noise-suppression-denseunet-ll-0001.xml
+wget -vc https://storage.openvinotoolkit.org/repositories/open_model_zoo/2023.0/models_bin/1/noise-suppression-denseunet-ll-0001/FP16/noise-suppression-denseunet-ll-0001.xml
 ```
 ```bash
-wget https://storage.openvinotoolkit.org/repositories/open_model_zoo/2023.0/models_bin/1/noise-suppression-denseunet-ll-0001/FP16/noise-suppression-denseunet-ll-0001.bin
+wget -vc https://storage.openvinotoolkit.org/repositories/open_model_zoo/2023.0/models_bin/1/noise-suppression-denseunet-ll-0001/FP16/noise-suppression-denseunet-ll-0001.bin
 ```
 
 Passo 16: Copiando superestrutura
@@ -516,7 +516,6 @@ Passo 16: Copiando superestrutura
 1. Vamos retornar novamente para o diretorio `openvino-models`:
 ```bash
 cd ~/audacity-openvino/openvino-models
-tree -d
 ```
 2. Vamos olhar a arvore de diretórios:
 ```bash
