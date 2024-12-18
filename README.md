@@ -14,20 +14,9 @@ Antes de entrar nos detalhes, aqui está uma visão geral das etapas:
 
 **Nota:** Ao longo da documentação, utilizamos `~/audacity-openvino/` como diretório de trabalho padrão, onde os pacotes e componentes serão baixados e o projeto será construído. Sinta-se à vontade para usar essa estrutura ou configurar um diretório em outro local do seu sistema com nomes que funcionem melhor para você. Apenas certifique-se de ajustar os comandos conforme necessário.
 
-Passo 1: Tenho um processador Intel?
+Passo 1: Tenho o clinfo e o mesa-opencl-icd?
 ---
-1. O OpenVINO é um produto Intel e sem o proessador da marca, não vai dar certo. Você pode descobrir se seu computador atende a este requisito exeutando no terminal:
-```bash
-lscpu | grep "Vendor ID"
-```
-O resultado deverá ser algo como:
-```bash
-vendor_id	: GenuineIntel
-(...)
-```
-
-2. Se não for Intel, é possivel que não funcione, caso queira prosseguir assim mesmo, fique a vontade.
-Precisaremos atualizar o repositório e instalar o 'clinfo':
+1. Precisaremos atualizar o repositório e instalar o 'clinfo' e 'mesa-opencl-icd':
 ```bash
 sudo apt update
 sudo apt install -y clinfo mesa-opencl-icd
@@ -37,7 +26,6 @@ Passo 2: Tenho OpenCL instalado e funcional?
 ---
 Execute no terminal:
 ```bash
-sudo ldconfig
 clinfo
 ```
 Se a saída do comando for algo como:
