@@ -288,10 +288,9 @@ sudo pip3 install conan
 ```bash
 git clone https://github.com/audacity/audacity.git
 ```
-4. Vamos informar a versão desejada que iremos compilar:
+4. Vamos entrar na pasta para escolher a versão que iremos compilar:
 ```bash
 cd audacity
-git checkout release-3.7.0
 ```
 5. Veja as versões disponiveis:
 ```bash
